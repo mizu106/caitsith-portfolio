@@ -1,6 +1,5 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { defineConfig } from "vite"
 
 const config: QuartzConfig = {
   configuration: {
@@ -10,9 +9,15 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "ja-JP",
-    baseUrl: "mizu106.github.io/caitsith-portfolio",
+    baseUrl: "https://mizu106.github.io/caitsith-portfolio/",
     ignorePatterns: ["private", "templates"],
     defaultDateType: "modified",
+    markdown: {
+      wikilinks: true,
+      resolveAliases: true,
+      defaultLinkType: "wiki",
+    },
+    slugify: "obsidian",
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
@@ -43,12 +48,6 @@ const config: QuartzConfig = {
           highlight: "rgba(166, 148, 255, 0.15)",
         },
       },
-      markdown: {
-        wikilinks: true,
-        resolveAliases: true,
-        defaultLinkType: "wiki",
-      },
-      slugify: "obsidian",
     },
   },
   plugins: {
