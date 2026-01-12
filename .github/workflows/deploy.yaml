@@ -30,7 +30,7 @@ jobs:
       - name: Build Quartz site
         run: npx quartz build
 
-        name: Debug output
+      - name: Debug output
         run: ls -la
 
       - name: Upload artifact
