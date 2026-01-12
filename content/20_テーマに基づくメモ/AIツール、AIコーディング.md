@@ -10,7 +10,7 @@ tags:
 - [[Claude Code]]
 - 
 ### VSCode拡張
-- [[GitHub Copilot]]
+- [[20_テーマに基づくメモ/GitHub Copilot]]
 - 
 
 ### AIチャット

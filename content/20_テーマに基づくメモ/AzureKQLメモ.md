@@ -14,7 +14,7 @@ LogAnalyticsのテーブルを解説するブロック
 - [Azure Monitor ログのリファレンス - イベント - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/tables/event)
 Windowsイベントログ
 - [Azure Monitor ログ リファレンス - SecurityEvent - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/tables/securityevent)Windowsセキュリティイベントログ
-- [[Azureのログデータ収集]]
+- [[20_テーマに基づくメモ/Azureのログデータ収集]]
 DCRの設定方法（エビデンス）
 
 ### イベントログ抽出KQL

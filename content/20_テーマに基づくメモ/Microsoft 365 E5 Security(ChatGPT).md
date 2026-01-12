@@ -233,8 +233,8 @@ THEN: 承認ワークフロー + 時間制限付きアクセス
 
 ### 4.3 管理ポータル
 すべての機能は統合ポータルで管理されます：
-- **Microsoft Defender Portal**: https://security.microsoft.com
-- **Microsoft Entra admin center**: https://entra.microsoft.com
+- [**Microsoft Defender Portal**:](https://security.microsoft.com)
+- [**Microsoft Entra admin center**:](https://entra.microsoft.com)
 
 ---
 

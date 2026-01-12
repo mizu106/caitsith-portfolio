@@ -1,65 +1,37 @@
-import { QuartzConfig } from "./quartz/cfg"
+import { defineConfig } from "./quartz.config.def"
 import * as Plugin from "./quartz/plugins"
 
-const config: QuartzConfig = {
+export default defineConfig({
   configuration: {
-    pageTitle: "caitsith's Learning Log",
-    pageDescription: "Designing, Learning, and Thinking in Public",
+    pageTitle: "caitsith-portfolio",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
     locale: "ja-JP",
-    baseUrl: "mizu106.github.io/caitsith-portfolio",
-    ignorePatterns: ["private", "templates"],
-    defaultDateType: "modified",
-    theme: {
-      fontOrigin: "googleFonts",
-      cdnCaching: true,
-      typography: {
-        header: "Inter",
-        body: "Inter",
-        code: "JetBrains Mono",
-      },
-      colors: {
-        lightMode: {
-          light: "#faf8f5",
-          lightgray: "#e5e5e5",
-          gray: "#bdbdbd",
-          darkgray: "#4e4e4e",
-          dark: "#1a1a1a",
-          secondary: "#6b4eff",
-          tertiary: "#d1c9ff",
-          highlight: "rgba(107, 78, 255, 0.15)",
-        },
-        darkMode: {
-          light: "#1a1a1a",
-          lightgray: "#2a2a2a",
-          gray: "#6e6e6e",
-          darkgray: "#d4d4d4",
-          dark: "#faf8f5",
-          secondary: "#a694ff",
-          tertiary: "#3b2f80",
-          highlight: "rgba(166, 148, 255, 0.15)",
-        },
-      },
-    },
   },
+
+  markdown: {
+    wikilinks: true,
+    resolveAliases: true,
+    defaultLinkType: "wiki",
+    frontmatterAliases: true,
+  },
+
+  // Obsidian互換 slug 生成
+  slugify: "obsidian",
+
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
-      Plugin.CreatedModifiedDate(),
-      Plugin.SyntaxHighlighting(),
-      Plugin.TableOfContents(),
       Plugin.GitHubFlavoredMarkdown(),
-      Plugin.ObsidianFlavoredMarkdown(),
-      Plugin.CrawlLinks(),
-      Plugin.Description(),
-      Plugin.Latex(),
+      Plugin.TableOfContents(),
+      Plugin.CreatedModifiedDate(),
+      Plugin.ObsidianFlavoredMarkdown(), // ← 重要
+      Plugin.SyntaxHighlighting(),
     ],
-    filters: [
-      Plugin.RemoveDrafts(),
-    ],
+    filters: [Plugin.RemoveDrafts()],
     emitters: [
+      Plugin.AliasRedirects(), // ← 404回避に必須
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
       Plugin.FolderPage(),
@@ -70,6 +42,4 @@ const config: QuartzConfig = {
       Plugin.NotFoundPage(),
     ],
   },
-}
-
-export default config
+})
