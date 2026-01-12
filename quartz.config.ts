@@ -51,6 +51,7 @@ const config: QuartzConfig = {
       Plugin.SyntaxHighlighting(),
       Plugin.TableOfContents(),
       Plugin.GitHubFlavoredMarkdown(),
+      Plugin.ObsidianFlavoredMarkdown(),
       Plugin.CrawlLinks(),
       Plugin.Description(),
       Plugin.Latex(),
