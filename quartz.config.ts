@@ -1,5 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { defineConfig } from "vite"
 
 const config: QuartzConfig = {
   configuration: {
