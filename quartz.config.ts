@@ -56,9 +56,7 @@ const config: QuartzConfig = {
       Plugin.Description(),
       Plugin.Latex(),
     ],
-    filters: [
-      Plugin.RemoveDrafts(),
-    ],
+    filters: [Plugin.RemoveDrafts()],
     emitters: [
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
@@ -78,4 +76,5 @@ const config: QuartzConfig = {
   slugify: "obsidian",
 }
 
+// Quartz v4.5.2 では defineConfig は不要
 export default config
