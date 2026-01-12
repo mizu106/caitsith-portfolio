@@ -51,7 +51,13 @@ const config: QuartzConfig = {
       Plugin.SyntaxHighlighting(),
       Plugin.TableOfContents(),
       Plugin.GitHubFlavoredMarkdown(),
-      Plugin.ObsidianFlavoredMarkdown(),
+      Plugin.ObsidianFlavoredMarkdown({
+        resolveFileLinks: true,  // フォルダ付きリンクも解決
+        linkResolver: (link) => {
+          // [[Folder/File]] を /Folder/File に変換
+          return "/" + link.replace(/\\/g, "/")
+        },
+      }),
       Plugin.CrawlLinks(),
       Plugin.Description(),
       Plugin.Latex(),
@@ -76,5 +82,4 @@ const config: QuartzConfig = {
   slugify: "obsidian",
 }
 
-// Quartz v4.5.2 では defineConfig は不要
 export default config
