@@ -1,4 +1,4 @@
-import { QuartzConfig, defineConfig } from "./quartz/cfg"
+import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
@@ -78,4 +78,4 @@ const config: QuartzConfig = {
   slugify: "obsidian",
 }
 
-export default defineConfig(config)
+export default config
