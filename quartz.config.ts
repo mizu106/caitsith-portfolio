@@ -42,6 +42,12 @@ const config: QuartzConfig = {
           highlight: "rgba(166, 148, 255, 0.15)",
         },
       },
+      markdown: {
+        wikilinks: true,
+        resolveAliases: true,
+        defaultLinkType: "wiki",
+      },
+      slugify: "obsidian",
     },
   },
   plugins: {
@@ -72,12 +78,4 @@ const config: QuartzConfig = {
   },
 }
 
-export default defineConfig({
-  markdown: {
-    wikilinks: true,
-    resolveAliases: true,
-    defaultLinkType: "wiki",
-  },
-  slugify: "obsidian",
-})
-
+export default defineConfig(config)
