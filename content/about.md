@@ -1,3 +1,7 @@
+---
+title: "About"
+---
+
 # About caitsith
 
 普段は個人で Azure 設計や AI × Python の実験をしています。  

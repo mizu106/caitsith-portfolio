@@ -1,3 +1,7 @@
+---
+title: "caitsith's Learning Log"
+---
+
 # caitsith's Learning Log
 
 Azure設計・AI × Python を中心に、日々の学習と思考を記録しています。  
