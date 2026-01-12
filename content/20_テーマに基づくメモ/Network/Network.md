@@ -1,9 +1,9 @@
 # Network
 
-[Fortigate-40F](Fortigate-40F.md)
+[[20_テーマに基づくメモ/Network/Fortigate-40F]]
 
-[VPN](VPN.md)
+[[20_テーマに基づくメモ/Network/VPN]]
 
-[Secure Internet Gateway：SIG](Secure%20Internet%20Gateway：SIG.md)
+[[20_テーマに基づくメモ/Network/Secure Internet Gateway：SIG]]
 
-[WAN](WAN.md)
+[[20_テーマに基づくメモ/Network/WAN]]

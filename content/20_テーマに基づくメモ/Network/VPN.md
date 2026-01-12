@@ -1,5 +1,8 @@
+---
+tags:
+  - Network
+---
 
-[[Network]]
 # VPN
 
 - [VPNとは？　仕組みや主な種類、メリットとデメリットを徹底解説！｜インターコム](https://www.notion.so/VPN-1ae44039743f815382cedbcc084172a9?pvs=21)
