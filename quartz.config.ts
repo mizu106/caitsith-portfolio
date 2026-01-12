@@ -1,44 +1,65 @@
-import { defineConfig } from "@jackyzha0/quartz"
+import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
-export default defineConfig({
-  // サイト基本設定
-  site: {
-    title: "caitsith-portfolio",
-    description: "Obsidian Vault直結の技術ポートフォリオ",
-    baseUrl: "/caitsith-portfolio/",
-    locale: "ja-JP",
+const config: QuartzConfig = {
+  configuration: {
+    pageTitle: "caitsith's Learning Log",
+    pageDescription: "Designing, Learning, and Thinking in Public",
     enableSPA: true,
     enablePopovers: true,
     analytics: null,
+    locale: "ja-JP",
+    baseUrl: "mizu106.github.io/caitsith-portfolio",
+    ignorePatterns: ["private", "templates"],
+    defaultDateType: "modified",
+    theme: {
+      fontOrigin: "googleFonts",
+      cdnCaching: true,
+      typography: {
+        header: "Inter",
+        body: "Inter",
+        code: "JetBrains Mono",
+      },
+      colors: {
+        lightMode: {
+          light: "#faf8f5",
+          lightgray: "#e5e5e5",
+          gray: "#bdbdbd",
+          darkgray: "#4e4e4e",
+          dark: "#1a1a1a",
+          secondary: "#6b4eff",
+          tertiary: "#d1c9ff",
+          highlight: "rgba(107, 78, 255, 0.15)",
+        },
+        darkMode: {
+          light: "#1a1a1a",
+          lightgray: "#2a2a2a",
+          gray: "#6e6e6e",
+          darkgray: "#d4d4d4",
+          dark: "#faf8f5",
+          secondary: "#a694ff",
+          tertiary: "#3b2f80",
+          highlight: "rgba(166, 148, 255, 0.15)",
+        },
+      },
+    },
   },
-
-  // Markdown 設定
-  markdown: {
-    wikilinks: true,           // [[wikiリンク]] を有効化
-    resolveAliases: true,      // aliasを解決
-    defaultLinkType: "wiki",   // Wikiリンク形式
-    frontmatterAliases: true,  // frontmatterのaliasも解決
-  },
-
-  // Slug 生成方式（Obsidian互換）
-  slugify: "obsidian",
-
-  // プラグイン設定
   plugins: {
     transformers: [
       Plugin.FrontMatter(),
-      Plugin.GitHubFlavoredMarkdown(),
-      Plugin.TableOfContents(),
       Plugin.CreatedModifiedDate(),
-      Plugin.ObsidianFlavoredMarkdown(), // フォルダリンク対応
       Plugin.SyntaxHighlighting(),
+      Plugin.TableOfContents(),
+      Plugin.GitHubFlavoredMarkdown(),
+      Plugin.ObsidianFlavoredMarkdown(),
+      Plugin.CrawlLinks(),
+      Plugin.Description(),
+      Plugin.Latex(),
     ],
     filters: [
       Plugin.RemoveDrafts(),
     ],
     emitters: [
-      Plugin.AliasRedirects(),        // 404防止
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
       Plugin.FolderPage(),
@@ -49,4 +70,14 @@ export default defineConfig({
       Plugin.NotFoundPage(),
     ],
   },
+}
+
+export default defineConfig({
+  markdown: {
+    wikilinks: true,
+    resolveAliases: true,
+    defaultLinkType: "wiki",
+  },
+  slugify: "obsidian",
 })
+
