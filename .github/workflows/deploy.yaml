@@ -34,4 +34,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Quartz のビルド出力ディレクトリ
+          publish_dir: ./public  # Quartz のビルド出力ディレクトリ
