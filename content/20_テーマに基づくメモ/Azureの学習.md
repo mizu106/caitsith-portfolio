@@ -9,22 +9,22 @@ tags:
 
 ### [[Azure勉強メモ]]
 
-### [[AzureKQLメモ]]
+### [[20_テーマに基づくメモ/AzureKQLメモ]]
 
-### [[AzureVM解体新書]]
+### [[20_テーマに基づくメモ/AzureVM解体新書]]
 
-### [[AzureFirewall]]
+### [[20_テーマに基づくメモ/AzureFirewall]]
 
-### [[AzureVMwareSolution]]
+### [[01_書きかけ/AzureVMwareSolution]]
 
-### [[Azureのログデータ収集]]
+### [[20_テーマに基づくメモ/Azureのログデータ収集]]
 
-### [[AzureBatch]]
+### [[20_テーマに基づくメモ/AzureBatch]]
 
-### [[Azure Backup]]
+### [[20_テーマに基づくメモ/Azure Backup]]
 
-### [[AzureEventGrid]]
+### [[20_テーマに基づくメモ/AzureEventGrid]]
 
-### [[AzureAutomation]]
+### [[20_テーマに基づくメモ/AzureAutomation]]
 
 

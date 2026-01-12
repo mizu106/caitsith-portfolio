@@ -186,7 +186,7 @@ Pythonには`venv`というモジュールが標準で搭載されており、�
 | 19  | 多OSのインストールポイント列挙      | Kinsta           | 2   |
 | 20  | IDE選定や構築方法が図入りでわかりやすい | Udemy Benesse    | 2   |
 
-![[NotebookLM Mind Map.png]]
+![[20_テーマに基づくメモ/Python/NotebookLM Mind Map.png]]
 
-![[初めてのPythonクエスト.mp4]]
+![[20_テーマに基づくメモ/Python/初めてのPythonクエスト.mp4]]
 

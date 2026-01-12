@@ -29,7 +29,7 @@ tags:
 	2. ネットワーク設計（ExpressrouteやVPNGatewayでオンプレと接続する）
 	3. IPアドレスの重複回避
 2. デプロイ
-	1. [[AzureVMwareSolution]]から、AVSプライベートクラウドの作成。（リージョン、ノード数、CIDRなど入力する）
+	1. [[01_書きかけ/AzureVMwareSolution]]から、AVSプライベートクラウドの作成。（リージョン、ノード数、CIDRなど入力する）
 	2. 約4時間程でvSphere環境がデプロイされる。（vCenter、ESXi、vSAN、NSX-Tなど）
 3. HCXペアリング
 	1. HCXをデプロイする。
@@ -74,8 +74,8 @@ tags:
 
 VMware vSphereは、ESXiを使用したクラスター製品の名前。主にHA、vMotion、DRSに関するテーマを扱う書籍。
 
-### [[AVSのBCP機能]]
+### [[20_テーマに基づくメモ/AVSのBCP機能]]
 
-### [[AzureVMwareSolution]]
+### [[01_書きかけ/AzureVMwareSolution]]
 
 

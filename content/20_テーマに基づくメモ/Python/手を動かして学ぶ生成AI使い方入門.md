@@ -24,10 +24,10 @@ tags:
 - [ChatGPT](https://chatgpt.com/)
 ChatGPTはカスタマイズ可能。
 以下の画面は機能をON/OFFするための設定画面。
-![[Pasted image 20251016201416.png]]
+![[20_テーマに基づくメモ/Python/Pasted image 20251016201416.png]]
 次の画面は、出力される文章に影響を与える設定。
 テキストで記述する。
-![[Pasted image 20251016202125.png]]
+![[20_テーマに基づくメモ/Python/Pasted image 20251016202125.png]]
 
 ## 第2章　クラウドサービスの利用
 ### OpenAI API
@@ -134,7 +134,7 @@ plt.xlabel('epoch')
 plt.ylabel('loss')
 plt.show()
 ```
-![[Pasted image 20251016215131.png]]
+![[20_テーマに基づくメモ/Python/Pasted image 20251016215131.png]]
 
 ---
 ## 第3章　AIをカスタマイズする
