@@ -1,4 +1,4 @@
-import { QuartzConfig } from "./quartz/cfg"
+import { QuartzConfig, defineConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
@@ -12,12 +12,6 @@ const config: QuartzConfig = {
     baseUrl: "https://mizu106.github.io/caitsith-portfolio/",
     ignorePatterns: ["private", "templates"],
     defaultDateType: "modified",
-    markdown: {
-      wikilinks: true,
-      resolveAliases: true,
-      defaultLinkType: "wiki",
-    },
-    slugify: "obsidian",
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
@@ -76,6 +70,12 @@ const config: QuartzConfig = {
       Plugin.NotFoundPage(),
     ],
   },
+  markdown: {
+    wikilinks: true,
+    resolveAliases: true,
+    defaultLinkType: "wiki",
+  },
+  slugify: "obsidian",
 }
 
 export default defineConfig(config)
