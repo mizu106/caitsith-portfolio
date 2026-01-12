@@ -3,7 +3,7 @@ name: Deploy Quartz Site
 on:
   push:
     branches:
-      - main  # またはあなたのメインブランチ名
+      - v4  # またはあなたのメインブランチ名
 
 jobs:
   build-and-deploy:
