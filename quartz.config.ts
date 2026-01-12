@@ -9,7 +9,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "ja-JP",
-    baseUrl: "caitsith.github.io/caitsith-portfolio",
+    baseUrl: "mizu106.github.io/caitsith-portfolio",
     ignorePatterns: ["private", "templates"],
     defaultDateType: "modified",
     theme: {
