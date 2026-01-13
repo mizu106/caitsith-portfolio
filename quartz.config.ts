@@ -12,7 +12,7 @@ const config: QuartzConfig = {
     pageDescription: "Designing, Learning, and Thinking in Public",
     enableSPA: true,
     enablePopovers: true,
-    analytics: null,
+    analytics: null,      // Google Analyticsを無効化
     locale: "ja-JP",
     baseUrl: "mizu106.github.io/caitsith-portfolio",
     ignorePatterns: ["private", "templates", ".obsidian"],
@@ -76,7 +76,7 @@ const config: QuartzConfig = {
       Plugin.ContentPage(),
       Plugin.FolderPage(),
       Plugin.TagPage(),
-      Plugin.ContentIndex({
+      Plugin.ContentIndex({     // サイトマップとRSSを有効化
         enableSiteMap: true,
         enableRSS: true,
       }),
@@ -85,15 +85,15 @@ const config: QuartzConfig = {
       Plugin.Favicon(),
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      // Plugin.CustomOgImages(),
     ],
   },
-  markdown: {
+  markdown: {             // Obsidianスタイルのリンクを有効化
     wikilinks: true,
     resolveAliases: true,
     defaultLinkType: "wiki",
   },
-  slugify: "obsidian",
+  slugify: "obsidian",    // タイトルをURLスラッグに変換する方法
 }
 
 export default config

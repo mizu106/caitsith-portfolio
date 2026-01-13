@@ -62,7 +62,7 @@ GitHubActionsをトリガーするには条件があります。
 
 基本はbuildログをChatGPTに貼り付けて原因を聞くのですが、言いなりになっていると堂々巡りに遭います。そこで、エラー原因を読んだらワークフロー（buildの手順）が原因なのか、config（Quartzの設定）が原因なのか考えて必要な箇所だけChatGPTの指示を取り込みました。
 
-あまりに話が噛み合わなくなったら、現在のpackage.json（Quartzのコンフィグ）とdeploy.yaml（ワークフロー）を全文貼り付けて覚えて貰いました。
+あまりに話が噛み合わなくなったら、現在のquartz.config.ts（Quartzのコンフィグ）とdeploy.yaml（ワークフロー）を全文貼り付けて覚えて貰いました。
 
 ### QuartzのDeployを成功させてGitHub Pagesに表示する
 Actionsの左上にジョブ名のリストがあるので、Actionsで実行したいdeploy.yamlの名前（name: がジョブ名）を選択すると右側にログが表示されるので、最新の１つをクリックすると詳細が確認できます。
@@ -116,4 +116,47 @@ GitHub Actionsの資料
   [actions/deploy-pages: GitHub Action to publish artifacts to GitHub Pages for deployments](https://github.com/actions/deploy-pages?utm_source=chatgpt.com)
 - GitHub Pages 公式
   [GitHub Pages documentation - GitHub Docs](https://docs.github.com/en/pages)
+
+
+### 番外：よく使用したgitコマンド
+1. ローカルリポジトリを作成する
+   ``` bash
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin https://github.com/<user name>/<repository name>.git
+   git push -u origin main
+   ```
+2. リモートリポジトリの確認
+   ``` bash
+   git remote -v
+   ```
+3. カレントディレクトリにGitHubからクローンする
+   ``` bash
+   git clone https://github.com/<user name>/<ripository name>.git
+   ```
+4. リモートリポジトリを登録
+   ``` bash
+   git remote add origin https://github.com/<user name>/<repository name>.git
+   ```
+5. リモートリポジトリを変更
+   ``` bash
+   git remote set-url origin https://github.com/<user name>/<repository name>.git
+   ```
+6. 現在の状態を確認
+   ``` bash
+   git status
+   ```
+7. ブランチの状態を確認
+   ``` bash
+   git branch -a
+   ```   
+8. カレントディレクトリの変更ファイルをコミットしてプッシュ
+   ``` bash
+   git add .
+   git commit -m "コミットメッセージ"
+   git push origin v4        # ローカルブランチがoriginで、リモートブランチがv4の場合
+   ```
+
 
