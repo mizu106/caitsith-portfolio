@@ -53,9 +53,15 @@ const config: QuartzConfig = {
       transformers: [
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
-        priority: ["frontmatter", "git", "filesystem"],
+        priority: ["frontmatter", "filesystem"],
       }),
-      Plugin.SyntaxHighlighting(),
+      Plugin.SyntaxHighlighting({
+        theme: {
+          light: "github-light",
+          dark: "github-dark",
+        },
+        keepBackground: false,
+      }),
       Plugin.ObsidianFlavoredMarkdown({
         resolveFileLinks: true,  // フォルダ付きリンクも解決
         linkResolver: (link) => {
@@ -67,7 +73,7 @@ const config: QuartzConfig = {
       Plugin.TableOfContents(),
       Plugin.CrawlLinks(),
       Plugin.Description(),
-      Plugin.Latex({ renderEngine: "katex" }),
+      Plugin.Latex(),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
@@ -76,10 +82,7 @@ const config: QuartzConfig = {
       Plugin.ContentPage(),
       Plugin.FolderPage(),
       Plugin.TagPage(),
-      Plugin.ContentIndex({     // サイトマップとRSSを有効化
-        enableSiteMap: true,
-        enableRSS: true,
-      }),
+      Plugin.ContentIndex(),
       Plugin.Assets(),
       Plugin.Static(),
       Plugin.Favicon(),
