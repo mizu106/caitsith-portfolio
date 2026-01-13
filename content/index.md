@@ -4,6 +4,7 @@ title: "caitsith's Learning Log"
 
 # caitsith's Learning Log
 
+どこにでもいるITインフラのエンジニアです。主にオンプレのサーバー周りを多く経験してきました。（Windows、Linux）
 Azure設計・AI × Python を中心に、日々の学習と思考を記録しています。  
 このサイトは「成果物」ではなく、「思考の過程」を公開するためのものです。
 

@@ -74,7 +74,7 @@ tags:
 
 VMware vSphereは、ESXiを使用したクラスター製品の名前。主にHA、vMotion、DRSに関するテーマを扱う書籍。
 
-### [[20_テーマに基づくメモ/AVSのBCP機能]]
+### [[20_テーマに基づくメモ/Azure/AVSのBCP機能]]
 
 ### [[01_書きかけ/AzureVMwareSolution]]
 

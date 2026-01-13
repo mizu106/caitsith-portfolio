@@ -154,7 +154,6 @@ Git/GitHubのブランチ運用について、解説や戦略、実践的フロ�
 | チーム開発・GitLab開発フロー事例   | SIOS TechLab  | 2        |
 | 初心者向け基礎解説、使い方がすぐ分かる   | IT-Biz        | 2        |
 
-![[20_テーマに基づくメモ/Git/NotebookLM Mind Map (1).png]]
+![[20_テーマに基づくメモ/Git/NotebookLM Mind Map.png]]
 
-![[Gitブランチ戦略入門：混沌から秩序へ.mp4]]
 
