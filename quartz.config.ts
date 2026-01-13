@@ -12,9 +12,7 @@ const config: QuartzConfig = {
     pageDescription: "Designing, Learning, and Thinking in Public",
     enableSPA: true,
     enablePopovers: true,
-    analytics: {
-      provider: "plausible",
-    },
+    analytics: null,
     locale: "ja-JP",
     baseUrl: "mizu106.github.io/caitsith-portfolio",
     ignorePatterns: ["private", "templates", ".obsidian"],
@@ -57,13 +55,7 @@ const config: QuartzConfig = {
       Plugin.CreatedModifiedDate({
         priority: ["frontmatter", "git", "filesystem"],
       }),
-      Plugin.SyntaxHighlighting({
-        theme: {
-          light: "github-light",
-          dark: "github-dark",
-        },
-        keepBackground: false,
-      }),
+      Plugin.SyntaxHighlighting(),
       Plugin.ObsidianFlavoredMarkdown({
         resolveFileLinks: true,  // フォルダ付きリンクも解決
         linkResolver: (link) => {
