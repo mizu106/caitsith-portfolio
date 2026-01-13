@@ -50,7 +50,7 @@ const config: QuartzConfig = {
     },
   },
   plugins: {
-      transformers: [
+    transformers: [
       Plugin.FrontMatter(),
       Plugin.CreatedModifiedDate({
         priority: ["frontmatter", "filesystem"],
@@ -62,6 +62,8 @@ const config: QuartzConfig = {
         },
         keepBackground: false,
       }),
+      Plugin.TableOfContents(),
+      Plugin.GitHubFlavoredMarkdown(),
       Plugin.ObsidianFlavoredMarkdown({
         resolveFileLinks: true,  // フォルダ付きリンクも解決
         linkResolver: (link) => {
@@ -69,8 +71,6 @@ const config: QuartzConfig = {
           return "/" + link.replace(/\\/g, "/")
         },
       }),
-      Plugin.GitHubFlavoredMarkdown(),
-      Plugin.TableOfContents(),
       Plugin.CrawlLinks(),
       Plugin.Description(),
       Plugin.Latex(),
