@@ -1,16 +1,23 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
+/**
+ * Quartz 4 Configuration
+ *
+ * See https://quartz.jzhao.xyz/configuration for more information.
+ */
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "caitsith's Learning Log",
     pageDescription: "Designing, Learning, and Thinking in Public",
     enableSPA: true,
     enablePopovers: true,
-    analytics: null,
+    analytics: {
+      provider: "plausible",
+    },
     locale: "ja-JP",
     baseUrl: "mizu106.github.io/caitsith-portfolio",
-    ignorePatterns: ["private", "templates"],
+    ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
@@ -45,12 +52,18 @@ const config: QuartzConfig = {
     },
   },
   plugins: {
-    transformers: [
+      transformers: [
       Plugin.FrontMatter(),
-      Plugin.CreatedModifiedDate(),
-      Plugin.SyntaxHighlighting(),
-      Plugin.TableOfContents(),
-      Plugin.GitHubFlavoredMarkdown(),
+      Plugin.CreatedModifiedDate({
+        priority: ["frontmatter", "git", "filesystem"],
+      }),
+      Plugin.SyntaxHighlighting({
+        theme: {
+          light: "github-light",
+          dark: "github-dark",
+        },
+        keepBackground: false,
+      }),
       Plugin.ObsidianFlavoredMarkdown({
         resolveFileLinks: true,  // フォルダ付きリンクも解決
         linkResolver: (link) => {
@@ -58,20 +71,29 @@ const config: QuartzConfig = {
           return "/" + link.replace(/\\/g, "/")
         },
       }),
+      Plugin.GitHubFlavoredMarkdown(),
+      Plugin.TableOfContents(),
       Plugin.CrawlLinks(),
       Plugin.Description(),
-      Plugin.Latex(),
+      Plugin.Latex({ renderEngine: "katex" }),
     ],
     filters: [Plugin.RemoveDrafts()],
     emitters: [
+      Plugin.AliasRedirects(),
       Plugin.ComponentResources(),
       Plugin.ContentPage(),
       Plugin.FolderPage(),
       Plugin.TagPage(),
-      Plugin.ContentIndex(),
+      Plugin.ContentIndex({
+        enableSiteMap: true,
+        enableRSS: true,
+      }),
       Plugin.Assets(),
       Plugin.Static(),
+      Plugin.Favicon(),
       Plugin.NotFoundPage(),
+      // Comment out CustomOgImages to speed up build time
+      Plugin.CustomOgImages(),
     ],
   },
   markdown: {
