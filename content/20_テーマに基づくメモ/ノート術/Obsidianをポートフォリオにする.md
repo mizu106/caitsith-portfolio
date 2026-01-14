@@ -28,15 +28,19 @@ Quartzをcloneした配下のフォルダになるため、Vaultを直接clone�
 - QuartzにObsidian Vaultを取り込む流れ
 ``` mermaid
 graph TD
-  Vault[Obsidian Vault] --> |①commit| GitHub["リモートRepository(Private)"]
-  GitHub --> |②clone| Local[ローカルフォルダ]
-  Local --> |⑤一部抜粋してCopy| Content["{Quartz root}\content\"]
-  Quartz[Quartz] --> |③Fork| Portfolio[My Quartz]
-  Portfolio --> |④Clone| LocalQuartz["{Quartz root}\"]
+  Obsidian[Obsidian] --> |編集| Vault[Vaultフォルダ]
+  Vault --> |Pull&Push| GitHub["リモートRepository(Private)"]
+  Vault --> |③一部抜粋してCopy| Content[".\content\"]
+  Quartz[Quartz] --> |①Fork| Portfolio[My Quartz]
+  Portfolio --> |②Clone| LocalQuartz["{Quartz root}\"]
   LocalQuartz --> |下位フォルダ| Content
-  LocalQuartz --> |⑥Commit| Portfolio
-  Portfolio --> |⑦GitHub Actions| Actions[build]
-  Actions --> |⑧deploy| Pages[GitHub Pages（公開）]
+  LocalQuartz --> |④Commit| Portfolio
+  Portfolio --> |⑤GitHub Actions| Actions[build]
+  Actions --> |⑥deploy| Pages[GitHub Pages（公開）]
+  GitHub --> |Clone| PC[他のPC]
+  GitHub --> |Clone| Mobile[スマートフォン等]
+  PC --> |Pull&Push| GitHub
+  Mobile --> |Pull&Push| GitHub
 ```
 
 ### QuartzにコミットしてActionsをトリガーする
@@ -63,6 +67,19 @@ GitHubActionsをトリガーするには条件があります。
 基本はbuildログをChatGPTに貼り付けて原因を聞くのですが、言いなりになっていると堂々巡りに遭います。そこで、エラー原因を読んだらワークフロー（buildの手順）が原因なのか、config（Quartzの設定）が原因なのか考えて必要な箇所だけChatGPTの指示を取り込みました。
 
 あまりに話が噛み合わなくなったら、現在のquartz.config.ts（Quartzのコンフィグ）とdeploy.yaml（ワークフロー）を全文貼り付けて覚えて貰いました。
+
+#### quartz.config.tsファイル
+quartzの設定ファイルです。使用する色やプラグインの設定を書くファイルです。
+
+実行されるプラグインが多いとbuildとdeployに時間がかかるので、安定するまでは最小構成にして、安定してからプラグインの設定をしていきます。
+特に
+
+#### deploy.yamlファイル
+quartzをGitHub Actionsで動かすためのワークフローファイルです。
+
+これは動けばよいので、ChatGPTに書き直してもらいました。修正してPushしてGitHub Actionsのbuildとdeployの状況を見て、エラーが出たらログをChatGPTに貼って原因と対策を聞く。
+
+納得が行く修正なら取り込み、納得が行かない場合はChatGPTと相談する…　という繰り返しで作りました。元々のファイルと比較すると殆ど書き換えていて原型がありませんでした。
 
 ### QuartzのDeployを成功させてGitHub Pagesに表示する
 Actionsの左上にジョブ名のリストがあるので、Actionsで実行したいdeploy.yamlの名前（name: がジョブ名）を選択すると右側にログが表示されるので、最新の１つをクリックすると詳細が確認できます。
