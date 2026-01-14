@@ -1,5 +1,10 @@
+---
+tags:
+  - VPN
+  - ゼロトラストセキュリティ
+---
 
-セキュアインターネットゲートウェイ（Secure Internet Gateway：SIG）とは、==クラウドベースのセキュリティソリューションで、企業のネットワークをインターネットに安全に接続するサービス==です。
+セキュアインターネットゲートウェイ（Secure Internet Gateway：SIG）とは、=クラウドベースのセキュリティソリューションで、企業のネットワークをインターネットに安全に接続するサービス=です。
 
 SIGの主な機能は次のとおりです。ウェブフィルタリング、マルウェア対策、脅威インテリジェンス、 セキュリティポリシーの適用。
 
@@ -19,13 +24,5 @@ SIGの導入が検討されている背景としては、次のようなもの�
 
 [セキュアインターネットゲートウェイ | アルテリア・ネットワークス株式会社](https://www.arteria-net.com/business/service/internet/line/firewall/#:~:text=%E3%80%8C%E3%82%BB%E3%82%AD%E3%83%A5%E3%82%A2%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%82%B2%E3%83%BC%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A4%E3%80%8D%E3%81%AF%E3%80%81,%E8%BB%BD%E6%B8%9B%E3%81%8C%E5%8F%AF%E8%83%BD%E3%81%A8%E3%81%AA%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82)
 
-東京本社→ FortiGate → SIG（FW） → インターネット
-支店 → IP-VPN → FortiGate → SIG（FW） → インターネット
 
-※すでにZscalerに以降済み
-　FortiGate　→　ZPI
-　アルテリア・ネットワークスSIG　→　Zscaler
 
-# [VPN](VPN.md)
-
-# [Fortigate-40F](Fortigate-40F.md)

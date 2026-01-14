@@ -3,12 +3,6 @@ tags:
   - Azure
 ---
 
-## 目次
-```table-of-contents
-```
-
-### [[Azure勉強メモ]]
-
 ### [[20_テーマに基づくメモ/Azure/AzureKQLメモ]]
 
 ### [[20_テーマに基づくメモ/AzureVM解体新書]]

@@ -30,17 +30,19 @@ Quartzをcloneした配下のフォルダになるため、Vaultを直接clone�
 graph TD
   Obsidian[Obsidian] --> |編集| Vault[Vaultフォルダ]
   Vault --> |Pull&Push| GitHub["リモートRepository(Private)"]
-  Vault --> |③一部抜粋してCopy| Content[".\content\"]
-  Quartz[Quartz] --> |①Fork| Portfolio[My Quartz]
-  Portfolio --> |②Clone| LocalQuartz["{Quartz root}\"]
-  LocalQuartz --> |下位フォルダ| Content
-  LocalQuartz --> |④Commit| Portfolio
-  Portfolio --> |⑤GitHub Actions| Actions[build]
-  Actions --> |⑥deploy| Pages[GitHub Pages（公開）]
   GitHub --> |Clone| PC[他のPC]
   GitHub --> |Clone| Mobile[スマートフォン等]
   PC --> |Pull&Push| GitHub
   Mobile --> |Pull&Push| GitHub
+
+  Vault --> |③一部抜粋してCopy| Content[".\content\"]
+
+  Quartz[Quartz] --> |①Fork| Portfolio[My Quartz]
+  Portfolio --> |②Clone| LocalQuartz["{Quartz root}\"]
+  LocalQuartz --> |下位フォルダ| Content
+  LocalQuartz --> |④Pull&Push| Portfolio
+  Portfolio --> |⑤GitHub Actions| Actions[build]
+  Actions --> |⑥deploy| Pages[GitHub Pages（公開）]
 ```
 
 ### QuartzにコミットしてActionsをトリガーする
@@ -72,7 +74,7 @@ GitHubActionsをトリガーするには条件があります。
 quartzの設定ファイルです。使用する色やプラグインの設定を書くファイルです。
 
 実行されるプラグインが多いとbuildとdeployに時間がかかるので、安定するまでは最小構成にして、安定してからプラグインの設定をしていきます。
-特に
+特に*Faviconプラグインを有効にするとDeployでTimeoutする*ので注意が必要です。
 
 #### deploy.yamlファイル
 quartzをGitHub Actionsで動かすためのワークフローファイルです。
