@@ -11,48 +11,77 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
 
     async emit(ctx) {
       const outDir = path.join(ctx.argv.output, "og")
+      const absOutDir = path.resolve(outDir)
+
+      console.log("::notice::[OG] Output directory:", absOutDir)
+
       await fs.mkdir(outDir, { recursive: true })
 
       // フォント登録
-      registerFont(FONT_PATH, { family: "NotoSansJP" })
+      try {
+        const absFontPath = path.resolve(FONT_PATH)
+        console.log("::notice::[OG] Registering font:", absFontPath)
+        registerFont(absFontPath, { family: "NotoSansJP" })
+      } catch (e) {
+        console.error("::error::[OG] Font register failed", e)
+        throw e
+      }
+
+      console.log("::notice::[OG] Total input files:", ctx.allFiles.length)
 
       for (const file of ctx.allFiles) {
-        // string 対策
-        if (typeof file === "string") continue
-        if (!file.slug) continue
+        try {
+          if (typeof file === "string") {
+            console.log("[OG] Skipped (string):", file)
+            continue
+          }
 
-        const title =
-          file.frontmatter?.title ??
-          file.slug.replace(/-/g, " ")
+          if (!file.slug) {
+            console.log("[OG] Skipped (no slug):", file.filePath)
+            continue
+          }
 
-        const canvas = createCanvas(1200, 630)
-        const c = canvas.getContext("2d")
+          const title =
+            file.frontmatter?.title ??
+            file.slug.replace(/-/g, " ")
 
-        // 背景
-        c.fillStyle = "#0f172a"
-        c.fillRect(0, 0, 1200, 630)
+          console.log("::notice::[OG] Generating for:", file.slug)
 
-        // テキスト
-        c.fillStyle = "#ffffff"
-        c.font = "bold 60px NotoSansJP"
-        c.textBaseline = "top"
+          const canvas = createCanvas(1200, 630)
+          const c = canvas.getContext("2d")
 
-        drawMultilineText(c, title, 100, 200, 1000, 80)
+          // 背景
+          c.fillStyle = "#0f172a"
+          c.fillRect(0, 0, 1200, 630)
 
-        const buffer = canvas.toBuffer("image/png")
+          // テキスト
+          c.fillStyle = "#ffffff"
+          c.font = "bold 60px NotoSansJP"
+          c.textBaseline = "top"
 
-        const outPath = path.join(outDir, `${file.slug}.png`)
-        await fs.writeFile(outPath, buffer)
+          drawMultilineText(c, title, 100, 200, 1000, 80)
 
-        // デバッグログ
-        console.log("[OG GENERATED]", path.resolve(outPath))
-        await fs.access(outPath)
-        console.log("[OG EXISTS]", path.resolve(outPath))
+          const buffer = canvas.toBuffer("image/png")
 
-        // og:image 注入
-        file.frontmatter = file.frontmatter ?? {}
-        file.frontmatter.ogImage = `/og/${file.slug}.png`
+          const outPath = path.join(outDir, `${file.slug}.png`)
+          const absOutPath = path.resolve(outPath)
+
+          await fs.writeFile(outPath, buffer)
+
+          console.log("::notice::[OG GENERATED]:", absOutPath)
+
+          // frontmatter 注入
+          file.frontmatter = file.frontmatter ?? {}
+          file.frontmatter.ogImage = `/og/${file.slug}.png`
+
+        } catch (err) {
+          console.error("::error::[OG] Failed for file:", file)
+          console.error(err)
+          throw err
+        }
       }
+
+      console.log("::notice::[OG] Generation finished")
 
       return []
     },
