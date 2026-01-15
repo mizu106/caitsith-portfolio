@@ -1,6 +1,7 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { CustomOgImagesJA } from "./quartz/plugins/CustomOgImages.ja"
+import { CustomOgImagesJA } from "./quartz/plugins/transformers/CustomOgImages.ja"
+
 
 /**
  * Quartz 4 Configuration
@@ -75,6 +76,8 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks(),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
+      // Comment out CustomOgImages to speed up build time
+      CustomOgImagesJA(),
     ],
     
     filters: [Plugin.RemoveDrafts()],
@@ -93,8 +96,6 @@ const config: QuartzConfig = {
       Plugin.Static(),
       // Plugin.Favicon(),    // 有効化するとDeployでTimeoutする為コメントアウト
       Plugin.NotFoundPage(),
-      // Comment out CustomOgImages to speed up build time
-      CustomOgImagesJA(),
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化

@@ -70,11 +70,14 @@ export default (() => {
             2. Custom auto-generated OG
             3. Default static OG
         */}
-        {fileData.frontmatter?.ogImage ? (
+        const ogImage =
+          fileData.frontmatter?.ogImage ??
+          `https://${cfg.baseUrl}/static/og-image.png`
           <>
-            <meta property="og:image" content={fileData.frontmatter.ogImage} />
+            <meta property="og:image" content={ogImage} />
+            <meta property="og:image:url" content={ogImage} />
+            <meta name="twitter:image" content={ogImage} />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content={fileData.frontmatter.ogImage} />
           </>
         ) : usesCustomOgImage ? (
           <>
