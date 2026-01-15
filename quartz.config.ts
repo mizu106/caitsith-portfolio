@@ -1,6 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { AutoOgImages } from "./quartz/plugins/AutoOgImages"
+import { CustomOgImagesJA } from "./quartz/plugins/CustomOgImages.ja"
 
 /**
  * Quartz 4 Configuration
@@ -95,8 +95,7 @@ const config: QuartzConfig = {
       // Plugin.Favicon(),    // 有効化するとDeployでTimeoutする為コメントアウト
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      // Plugin.CustomOgImages(),
-      Plugin.AutoOgImages(),
+      CustomOgImagesJA(),
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化
