@@ -41,8 +41,8 @@ jobs:
       - name: Build Quartz site
         run: npx quartz build
 
-      - name: Debug output
-        run: ls -la
+      - name: Debug output public
+        run: ls -la ./public/
 
       - name: Debug output og
         run: ls -la ./public/og/
