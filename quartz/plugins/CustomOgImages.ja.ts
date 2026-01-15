@@ -3,9 +3,11 @@ import { createCanvas, registerFont } from "canvas"
 import fs from "fs"
 import path from "path"
 
-registerFont(path.resolve("assets/fonts/NotoSansJP-Regular.otf"), {
+const fontPath = new URL("../../assets/fonts/NotoSansJP-Regular.otf", import.meta.url).pathname
+registerFont(fontPath, {
   family: "NotoSansJP",
 })
+
 
 export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
   return {
