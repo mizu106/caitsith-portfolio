@@ -44,6 +44,11 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
         const outPath = path.join(outDir, `${file.slug}.png`)
         await fs.writeFile(outPath, buffer)
 
+        // デバッグログ
+        console.log("[OG GENERATED]", path.resolve(outPath))
+        await fs.access(outPath)
+        console.log("[OG EXISTS]", path.resolve(outPath))
+
         // og:image 注入
         file.frontmatter = file.frontmatter ?? {}
         file.frontmatter.ogImage = `/og/${file.slug}.png`
