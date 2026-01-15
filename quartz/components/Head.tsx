@@ -72,4 +72,42 @@ export default (() => {
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image:alt" content={description} />
+
+        {/* OG IMAGE */}
+        {ogImageUrl && (
+          <>
+            <meta property="og:image" content={ogImageUrl} />
+            <meta property="og:image:url" content={ogImageUrl} />
+            <meta name="twitter:image" content={ogImageUrl} />
+            <meta property="og:image:type" content={`image/${getFileExtension(ogImageUrl) ?? "png"}`} />
+          </>
+        )}
+
+        {cfg.baseUrl && (
+          <>
+            <meta property="twitter:domain" content={cfg.baseUrl} />
+            <meta property="og:url" content={socialUrl} />
+            <meta property="twitter:url" content={socialUrl} />
+          </>
+        )}
+
+        <link rel="icon" href={iconPath} />
+        <meta name="description" content={description} />
+        <meta name="generator" content="Quartz" />
+
+        {/* CSS / JS / 追加ヘッド */}
+        {css.map((resource) => CSSResourceToStyleElement(resource, true))}
+        {js
+          .filter((resource) => resource.loadTime === "beforeDOMReady")
+          .map((res) => JSResourceToScriptElement(res, true))}
+        {additionalHead.map((resource) => (typeof resource === "function" ? resource(fileData) : resource))}
+      </head>
+    )
+  }
+
+  return Head
+}) satisfies QuartzComponentConstructor
