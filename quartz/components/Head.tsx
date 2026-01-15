@@ -65,13 +65,13 @@ export default (() => {
         <meta property="og:description" content={description} />
         <meta property="og:image:alt" content={description} />
 
-        {/* OG IMAGE PRIORITY:
+        /* OG IMAGE PRIORITY:
             1. frontmatter.ogImage
             2. Custom auto-generated OG
             3. Default static OG
-        */}
+        */
         const ogImage =
-          fileData.frontmatter?.ogImage ??
+          fileData.frontmatter?.ogImage ?? (
           `https://${cfg.baseUrl}/static/og-image.png`
           <>
             <meta property="og:image" content={ogImage} />
@@ -97,7 +97,7 @@ export default (() => {
               content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
             />
           </>
-        )}
+        )
 
         {cfg.baseUrl && (
           <>
