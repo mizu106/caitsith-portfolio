@@ -1,63 +1,77 @@
-import { createCanvas, registerFont } from "canvas"
+import fs from "fs/promises"
 import path from "path"
-import { fileURLToPath } from "url"
+import { createCanvas, registerFont } from "canvas"
 import type { QuartzEmitterPlugin } from "../types"
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const FONT_PATH = "assets/fonts/NotoSansJP-Regular.ttf"
 
-const fontRegular = path.resolve(__dirname, "../../assets/fonts/NotoSansJP-Regular.ttf")
-const fontBold = path.resolve(__dirname, "../../assets/fonts/NotoSansJP-Bold.ttf")
-
-registerFont(fontRegular, { family: "NotoSansJP", weight: "normal" })
-registerFont(fontBold, { family: "NotoSansJP", weight: "bold" })
-
-export const CustomOgImagesJA = (): QuartzEmitterPlugin => {
+export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
   return {
     name: "CustomOgImagesJA",
-    getQuartzComponents() {
-      return []
-    },
-    async emit({ allFiles }) {
-      const width = 1200
-      const height = 630
 
-      for (const file of allFiles) {
-        // 🔒 Markdownファイル以外を除外
-        if (typeof file !== "object" || !("slug" in file)) {
-          continue
-        }
+    async emit(ctx) {
+      const outDir = path.join(ctx.argv.output, "og")
+      await fs.mkdir(outDir, { recursive: true })
+
+      // フォント登録
+      registerFont(FONT_PATH, { family: "NotoSansJP" })
+
+      for (const file of ctx.allFiles) {
+        // string 対策
+        if (typeof file === "string") continue
+        if (!file.slug) continue
 
         const title =
           file.frontmatter?.title ??
-          file.slug ??
-          "Untitled"
+          file.slug.replace(/-/g, " ")
 
-        const canvas = createCanvas(width, height)
-        const ctx = canvas.getContext("2d")
+        const canvas = createCanvas(1200, 630)
+        const c = canvas.getContext("2d")
 
-        ctx.fillStyle = "#0f172a"
-        ctx.fillRect(0, 0, width, height)
+        // 背景
+        c.fillStyle = "#0f172a"
+        c.fillRect(0, 0, 1200, 630)
 
-        ctx.fillStyle = "#ffffff"
-        ctx.font = "bold 64px NotoSansJP"
-        ctx.fillText(title, 80, 200)
+        // テキスト
+        c.fillStyle = "#ffffff"
+        c.font = "bold 60px NotoSansJP"
+        c.textBaseline = "top"
+
+        drawMultilineText(c, title, 100, 200, 1000, 80)
 
         const buffer = canvas.toBuffer("image/png")
 
-        file.frontmatter = {
-          ...file.frontmatter,
-          image: `/og/${file.slug}.png`,
-          "twitter:card": "summary_large_image",
-        }
+        const outPath = path.join(outDir, `${file.slug}.png`)
+        await fs.writeFile(outPath, buffer)
 
-        file.generatedAssets.push({
-          path: `og/${file.slug}.png`,
-          data: buffer,
-        })
+        // og:image 注入
+        file.frontmatter = file.frontmatter ?? {}
+        file.frontmatter.ogImage = `/og/${file.slug}.png`
       }
 
       return []
     },
   }
+}
+
+// 自動改行
+function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
+  const chars = text.split("")
+  let line = ""
+  let yy = y
+
+  for (const ch of chars) {
+    const testLine = line + ch
+    const w = ctx.measureText(testLine).width
+
+    if (w > maxWidth) {
+      ctx.fillText(line, x, yy)
+      line = ch
+      yy += lineHeight
+    } else {
+      line = testLine
+    }
+  }
+
+  if (line) ctx.fillText(line, x, yy)
 }
