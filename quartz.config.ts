@@ -1,5 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
+import { AutoOgImages } from "./quartz/plugins/AutoOgImages"
 
 /**
  * Quartz 4 Configuration
@@ -21,9 +22,12 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Inter",
-        body: "Inter",
+        header: "Noto Sans JP",
+        body: "Noto Sans JP",
         code: "JetBrains Mono",
+        //header: "Inter",
+        //body: "Inter",
+        //code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
@@ -88,25 +92,11 @@ const config: QuartzConfig = {
       }),
       Plugin.Assets(),
       Plugin.Static(),
-      // Plugin.Favicon(),
+      // Plugin.Favicon(),    // 有効化するとDeployでTimeoutする為コメントアウト
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages({
-        width: 1200,
-        height: 630,
-
-        defaultFontFamily: "Noto Sans JP",
-
-        fontFiles: [
-          "static/fonts/NotoSansJP-Regular.ttf",
-          "static/fonts/NotoSansJP-Bold.ttf",
-        ],
-
-        titleFontSize: 64,
-        descriptionFontSize: 32,
-        padding: 80,
-        lineHeight: 1.4,
-      }),
+      // Plugin.CustomOgImages(),
+      Plugin.AutoOgImages(),
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化
