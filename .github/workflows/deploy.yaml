@@ -25,7 +25,7 @@ jobs:
           cache: npm
 
       # canvas依存（OG画像生成に必須）
-      - name: Install canvas deps
+      - name: Install native deps for canvas
         run: |
           sudo apt-get update
           sudo apt-get install -y \

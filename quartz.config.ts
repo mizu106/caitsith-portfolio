@@ -22,12 +22,9 @@ const config: QuartzConfig = {
       fontOrigin: "googleFonts",
       cdnCaching: true,
       typography: {
-        header: "Noto Sans JP",
-        body: "Noto Sans JP",
+        header: "Inter",
+        body: "Inter",
         code: "JetBrains Mono",
-        //header: "Inter",
-        //body: "Inter",
-        //code: "JetBrains Mono",
       },
       colors: {
         lightMode: {
@@ -96,6 +93,11 @@ const config: QuartzConfig = {
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
       CustomOgImagesJA(),
+      Plugin.CustomMeta({
+        twitter: {
+          card: "summary_large_image",
+        },
+      })
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化
