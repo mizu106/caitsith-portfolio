@@ -36,9 +36,6 @@ export default (() => {
     )
     const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
 
-    // 自動生成OGのパス（CustomOgImagesEmitterの出力と合わせる）
-    const autoOgImagePath = joinSegments(socialUrl, "og.png")
-
     return (
       <head>
         <title>{title}</title>
@@ -65,26 +62,7 @@ export default (() => {
         <meta property="og:description" content={description} />
         <meta property="og:image:alt" content={description} />
 
-        {/* OG IMAGE PRIORITY:
-            1. frontmatter.ogImage
-            2. Custom auto-generated OG
-            3. Default static OG
-        */}
-        {fileData.frontmatter?.ogImage ? (
-          <>
-            <meta property="og:image" content={fileData.frontmatter.ogImage} />
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:image" content={fileData.frontmatter.ogImage} />
-          </>
-        ) : usesCustomOgImage ? (
-          <>
-            <meta
-              property="og:image"
-              content={joinSegments(socialUrl, "og.png")}
-            />
-            <meta name="twitter:image" content={joinSegments(socialUrl, "og.png")} />
-          </>
-        ) : (
+        {!usesCustomOgImage && (
           <>
             <meta property="og:image" content={ogImageDefaultPath} />
             <meta property="og:image:url" content={ogImageDefaultPath} />
