@@ -5,6 +5,7 @@ import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
 import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage"
+
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -36,13 +37,22 @@ export default (() => {
     )
     const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
 
-    // 自動生成OGのパス（CustomOgImagesEmitterの出力と合わせる）
-    const autoOgImagePath = joinSegments(socialUrl, "og.png")
+    // OG IMAGE URL を決定（frontmatter → Custom → Default の優先順）
+    let ogImageUrl: string
+    if (fileData.frontmatter?.ogImage) {
+      ogImageUrl = fileData.frontmatter.ogImage
+    } else if (usesCustomOgImage) {
+      ogImageUrl = joinSegments(socialUrl, "og.png")
+    } else {
+      ogImageUrl = ogImageDefaultPath
+    }
 
     return (
       <head>
         <title>{title}</title>
         <meta charSet="utf-8" />
+
+        {/* Google Fonts / 外部リソース */}
         {cfg.theme.cdnCaching && cfg.theme.fontOrigin === "googleFonts" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,78 +63,13 @@ export default (() => {
             )}
           </>
         )}
+
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <meta name="og:site_name" content={cfg.pageTitle}></meta>
+        {/* OG / Twitter */}
+        <meta name="og:site_name" content={cfg.pageTitle} />
         <meta property="og:title" content={title} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image:alt" content={description} />
-
-        /* OG IMAGE PRIORITY:
-            1. frontmatter.ogImage
-            2. Custom auto-generated OG
-            3. Default static OG
-        */
-        const ogImage =
-          fileData.frontmatter?.ogImage ?? (
-          `https://${cfg.baseUrl}/static/og-image.png`
-          <>
-            <meta property="og:image" content={ogImage} />
-            <meta property="og:image:url" content={ogImage} />
-            <meta name="twitter:image" content={ogImage} />
-            <meta name="twitter:card" content="summary_large_image" />
-          </>
-        ) : usesCustomOgImage ? (
-          <>
-            <meta
-              property="og:image"
-              content={joinSegments(socialUrl, "og.png")}
-            />
-            <meta name="twitter:image" content={joinSegments(socialUrl, "og.png")} />
-          </>
-        ) : (
-          <>
-            <meta property="og:image" content={ogImageDefaultPath} />
-            <meta property="og:image:url" content={ogImageDefaultPath} />
-            <meta name="twitter:image" content={ogImageDefaultPath} />
-            <meta
-              property="og:image:type"
-              content={`image/${getFileExtension(ogImageDefaultPath) ?? "png"}`}
-            />
-          </>
-        )
-
-        {cfg.baseUrl && (
-          <>
-            <meta property="twitter:domain" content={cfg.baseUrl}></meta>
-            <meta property="og:url" content={socialUrl}></meta>
-            <meta property="twitter:url" content={socialUrl}></meta>
-          </>
-        )}
-
-        <link rel="icon" href={iconPath} />
-        <meta name="description" content={description} />
-        <meta name="generator" content="Quartz" />
-
-        {css.map((resource) => CSSResourceToStyleElement(resource, true))}
-        {js
-          .filter((resource) => resource.loadTime === "beforeDOMReady")
-          .map((res) => JSResourceToScriptElement(res, true))}
-        {additionalHead.map((resource) => {
-          if (typeof resource === "function") {
-            return resource(fileData)
-          } else {
-            return resource
-          }
-        })}
-      </head>
-    )
-  }
-
-  return Head
-}) satisfies QuartzComponentConstructor
+        <meta name="twitter:title" content={
