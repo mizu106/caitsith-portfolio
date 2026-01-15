@@ -93,11 +93,6 @@ const config: QuartzConfig = {
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
       CustomOgImagesJA(),
-      Plugin.CustomMeta({
-        twitter: {
-          card: "summary_large_image",
-        },
-      })
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化

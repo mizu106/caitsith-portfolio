@@ -25,16 +25,15 @@ jobs:
           cache: npm
 
       # canvas依存（OG画像生成に必須）
-      - name: Install native deps for canvas
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
             libcairo2-dev \
-            libjpeg-dev \
             libpango1.0-dev \
+            libjpeg-dev \
             libgif-dev \
-            librsvg2-dev \
-            fonts-noto-cjk
+            librsvg2-dev
 
       - name: Install dependencies
         run: npm ci
