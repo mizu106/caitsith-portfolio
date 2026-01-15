@@ -18,12 +18,20 @@ export const CustomOgImagesJA = (): QuartzEmitterPlugin => {
     getQuartzComponents() {
       return []
     },
-    async emit({ cfg, allFiles }) {
+    async emit({ allFiles }) {
       const width = 1200
       const height = 630
 
       for (const file of allFiles) {
-        const title = file.frontmatter?.title ?? file.slug
+        // 🔒 Markdownファイル以外を除外
+        if (typeof file !== "object" || !("slug" in file)) {
+          continue
+        }
+
+        const title =
+          file.frontmatter?.title ??
+          file.slug ??
+          "Untitled"
 
         const canvas = createCanvas(width, height)
         const ctx = canvas.getContext("2d")
