@@ -91,7 +91,22 @@ const config: QuartzConfig = {
       // Plugin.Favicon(),
       Plugin.NotFoundPage(),
       // Comment out CustomOgImages to speed up build time
-      Plugin.CustomOgImages(),
+      Plugin.CustomOgImages({
+        width: 1200,
+        height: 630,
+
+        defaultFontFamily: "Noto Sans JP",
+
+        fontFiles: [
+          "static/fonts/NotoSansJP-Regular.ttf",
+          "static/fonts/NotoSansJP-Bold.ttf",
+        ],
+
+        titleFontSize: 64,
+        descriptionFontSize: 32,
+        padding: 80,
+        lineHeight: 1.4,
+      }),
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化
