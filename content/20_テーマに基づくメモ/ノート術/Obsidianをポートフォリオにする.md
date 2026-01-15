@@ -105,11 +105,41 @@ Actionsの左上にジョブ名のリストがあるので、Actionsで実行し
 - buildでどのパスに出力されるか確認する方法（-を忘れずに付けて下さい、ジョブの区切りになっています）
 ![[20_テーマに基づくメモ/ノート術/Pasted image 20260113233020.png]]
 
+- こんな感じで出力されます
+![[20_テーマに基づくメモ/ノート術/Pasted image 20260115125821.png]]
+
 ### リンク切れ対策
 最後にObsidianは階層構造を持つことが出来ますが、Quartzの初期の設定では対応していません。
 そこで、QuartzとObsidian両方に設定が必要になります。
 
-…続く
+- Obsidianの表記に対応するプラグイン
+Obsidianの表記に対応させるプラグインです。ここに以下の設定を行うと、Obsidianの角括弧でかこむリンクにパスを含んだ表記が使用できます。
+``` TypeScript
+      Plugin.ObsidianFlavoredMarkdown({
+        resolveFileLinks: true,  // フォルダ付きリンクも解決
+        linkResolver: (link) => {
+          // [[Folder/File]] を /Folder/File に変換
+          return "/" + link.replace(/\\/g, "/")
+        },
+      }),
+```
+
+- Obsidianスタイルのリンクに対応する設定
+プラグインを記述するブロックに続けて、以下のブロックを追記すると以下の書式に対応します。最後のslugifyはObsidianがタイトルをファイル名に変換する方式に合わせてリンクを作成する設定です。
+``` md
+[[Wiki Link]]
+[[Folder/Page]]
+[[Note Title|表示名]]
+```
+- 設定内容
+``` TypeScript
+  markdown: {             
+    wikilinks: true,
+    resolveAliases: true,
+    defaultLinkType: "wiki",
+  },
+  slugify: "obsidian",    // タイトルをURLスラッグに変換する方法
+```
 
 ### 使用したURL
 以下の事を理解して躓きを減らす為に、URLを貼っておきます。（必ず最新を確認して下さい）

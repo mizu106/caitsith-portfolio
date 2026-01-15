@@ -93,6 +93,10 @@ EntraIDからKerberos TGT（チケット・グラント・チケット）を発�
 
 含めるSIDはオンプレADから同期したアカウントなら「onPremisesSecurityIdentifier」に保管しておいたSIDを使用、EntraIDで作成されたアカウントなら（保管しているSIDが無いので）手動で割り当てます。
 
+#### パスワードライトバック
+通常オンプレADと連携されたアカウントのパスワードをEntraID側で変更した場合、オンプレADには反映されないが、パスワードライトバックを有効化することでオンプレADに反映されるようにすることが出来る仕組みです。
+この機能はEntraID Connectの機能です。EntraIDのSSPR（Self-Service Password Reset）を利用する場合、必須の機能となります。
+
 ## プロトコルの違い
 
 | 項目            | Entra ID                                                                                                      | オンプレAD                                                                                                       |
