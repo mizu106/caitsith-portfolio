@@ -42,7 +42,6 @@ export const CustomOgImagesJA: QuartzTransformerPlugin = () => {
 
         const buffer = canvas.toBuffer("image/png")
 
-        const outPath = path.join(outDir, `${file.slug}.png`)
         await fs.writeFile(outPath, buffer)
 
         // デバッグログ（Actionsに出る）
