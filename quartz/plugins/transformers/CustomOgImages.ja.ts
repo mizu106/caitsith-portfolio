@@ -13,12 +13,11 @@ export const CustomOgImagesJA: QuartzTransformerPlugin = () => {
       const outDir = path.join(ctx.argv.output, "og")
       await fs.mkdir(outDir, { recursive: true })
 
+      // フォント登録
       registerFont(FONT_PATH, { family: "NotoSansJP" })
 
       for (const file of files) {
-        // Markdownファイルのみ
         if (!file.slug) continue
-        if (file.slug.toLowerCase() === "readme") continue
 
         const title =
           file.frontmatter?.title ??
@@ -39,12 +38,14 @@ export const CustomOgImagesJA: QuartzTransformerPlugin = () => {
         drawMultilineText(c, title, 100, 200, 1000, 80)
 
         const buffer = canvas.toBuffer("image/png")
+
         const outPath = path.join(outDir, `${file.slug}.png`)
         await fs.writeFile(outPath, buffer)
 
+        // デバッグログ（Actionsに出る）
         console.log(`[OG] Generated: ${outPath}`)
 
-        // frontmatterに注入（ここ重要）
+        // frontmatter 注入
         file.frontmatter = file.frontmatter ?? {}
         file.frontmatter.ogImage = `/og/${file.slug}.png`
       }

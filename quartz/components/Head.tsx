@@ -4,7 +4,6 @@ import { CSSResourceToStyleElement, JSResourceToScriptElement } from "../util/re
 import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
-import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage"
 
 export default (() => {
   const Head: QuartzComponent = ({
@@ -16,6 +15,7 @@ export default (() => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const title =
       (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+
     const description =
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??
@@ -28,31 +28,20 @@ export default (() => {
     const baseDir = fileData.slug === "404" ? path : pathToRoot(fileData.slug!)
     const iconPath = joinSegments(baseDir, "static/icon.png")
 
-    // Url of current page
     const socialUrl =
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
-    const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
-      (e) => e.name === CustomOgImagesEmitterName,
-    )
-    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
-
-    // OG IMAGE URL を決定（frontmatter → Custom → Default の優先順）
-    let ogImageUrl: string
-    if (fileData.frontmatter?.ogImage) {
-      ogImageUrl = fileData.frontmatter.ogImage
-    } else if (usesCustomOgImage) {
-      ogImageUrl = joinSegments(socialUrl, "og.png")
-    } else {
-      ogImageUrl = ogImageDefaultPath
-    }
+    // OG画像URL（frontmatter優先 → デフォルト）
+    const ogImageUrl =
+      fileData.frontmatter?.ogImage ??
+      `https://${cfg.baseUrl}/static/og-image.png`
 
     return (
       <head>
         <title>{title}</title>
         <meta charSet="utf-8" />
 
-        {/* Google Fonts / 外部リソース */}
+        {/* Fonts */}
         {cfg.theme.cdnCaching && cfg.theme.fontOrigin === "googleFonts" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,44 +56,43 @@ export default (() => {
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        {/* OG / Twitter */}
-        <meta name="og:site_name" content={cfg.pageTitle} />
+        {/* Basic Meta */}
+        <meta name="description" content={description} />
+
+        {/* Open Graph */}
+        <meta property="og:site_name" content={cfg.pageTitle} />
         <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
+        <meta property="og:url" content={socialUrl} />
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:url" content={ogImageUrl} />
+        <meta property="og:image:alt" content={description} />
+        <meta
+          property="og:image:type"
+          content={`image/${getFileExtension(ogImageUrl) ?? "png"}`}
+        />
+
+        {/* Twitter / X */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image:alt" content={description} />
-
-        {/* OG IMAGE */}
-        {ogImageUrl && (
-          <>
-            <meta property="og:image" content={ogImageUrl} />
-            <meta property="og:image:url" content={ogImageUrl} />
-            <meta name="twitter:image" content={ogImageUrl} />
-            <meta property="og:image:type" content={`image/${getFileExtension(ogImageUrl) ?? "png"}`} />
-          </>
-        )}
-
-        {cfg.baseUrl && (
-          <>
-            <meta property="twitter:domain" content={cfg.baseUrl} />
-            <meta property="og:url" content={socialUrl} />
-            <meta property="twitter:url" content={socialUrl} />
-          </>
-        )}
+        <meta name="twitter:image" content={ogImageUrl} />
+        {cfg.baseUrl && <meta name="twitter:domain" content={cfg.baseUrl} />}
+        <meta name="twitter:url" content={socialUrl} />
 
         <link rel="icon" href={iconPath} />
-        <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
 
-        {/* CSS / JS / 追加ヘッド */}
+        {/* CSS / JS */}
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
           .filter((resource) => resource.loadTime === "beforeDOMReady")
           .map((res) => JSResourceToScriptElement(res, true))}
-        {additionalHead.map((resource) => (typeof resource === "function" ? resource(fileData) : resource))}
+
+        {additionalHead.map((resource) =>
+          typeof resource === "function" ? resource(fileData) : resource,
+        )}
       </head>
     )
   }
