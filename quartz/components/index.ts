@@ -23,7 +23,6 @@ import Breadcrumbs from "./Breadcrumbs"
 import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
-import CustomOgImagesJA from "./quartz/plugins/CustomOgImages.ja"
 
 export {
   ArticleTitle,
@@ -52,3 +51,5 @@ export {
   Flex,
   ConditionalRender,
 }
+export { CustomOgMetaJA } from "./transformers/CustomOgMeta.ja"
+export { CustomOgImagesJA } from "./emitters/CustomOgImages.ja"

@@ -10,6 +10,7 @@ export default (() => {
     cfg,
     fileData,
     externalResources,
+    ctx,
   }: QuartzComponentProps) => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const title =
@@ -30,17 +31,17 @@ export default (() => {
     const socialUrl =
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
-    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/og-image.png`
-
-    const ogImageUrl = fileData.frontmatter?.ogImage
-      ? joinSegments(url.toString(), fileData.frontmatter.ogImage)
-      : ogImageDefaultPath
+    // OG画像URL（frontmatter優先 → デフォルト）
+    const ogImageUrl =
+      fileData.frontmatter?.ogImage ??
+      `https://${cfg.baseUrl}/static/og-image.png`
 
     return (
       <head>
         <title>{title}</title>
         <meta charSet="utf-8" />
 
+        {/* Fonts */}
         {cfg.theme.cdnCaching && cfg.theme.fontOrigin === "googleFonts" && (
           <>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,41 +56,40 @@ export default (() => {
         <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossOrigin="anonymous" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        {/* Basic Meta */}
+        <meta name="description" content={description} />
+
         {/* Open Graph */}
         <meta property="og:site_name" content={cfg.pageTitle} />
         <meta property="og:title" content={title} />
-        <meta property="og:type" content="website" />
         <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={socialUrl} />
         <meta property="og:image" content={ogImageUrl} />
         <meta property="og:image:url" content={ogImageUrl} />
+        <meta property="og:image:alt" content={description} />
         <meta
           property="og:image:type"
           content={`image/${getFileExtension(ogImageUrl) ?? "png"}`}
         />
-        <meta property="og:image:alt" content={description} />
 
-        {/* Twitter */}
+        {/* Twitter / X */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImageUrl} />
-
-        {cfg.baseUrl && (
-          <>
-            <meta property="twitter:domain" content={cfg.baseUrl} />
-            <meta property="og:url" content={socialUrl} />
-            <meta property="twitter:url" content={socialUrl} />
-          </>
-        )}
+        {cfg.baseUrl && <meta name="twitter:domain" content={cfg.baseUrl} />}
+        <meta name="twitter:url" content={socialUrl} />
 
         <link rel="icon" href={iconPath} />
-        <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
 
+        {/* CSS / JS */}
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js
           .filter((resource) => resource.loadTime === "beforeDOMReady")
           .map((res) => JSResourceToScriptElement(res, true))}
+
         {additionalHead.map((resource) =>
           typeof resource === "function" ? resource(fileData) : resource,
         )}
