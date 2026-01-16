@@ -10,40 +10,22 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
     name: "CustomOgImagesJA",
 
     async emit(ctx) {
-      console.log("[OG] ===== emitter start =====")
+      const outRoot = path.join(ctx.argv.output, "og")
 
-      const outDir = path.join(ctx.argv.output, "og")
-      console.log("[OG] outDir:", outDir)
-
-      await fs.mkdir(outDir, { recursive: true })
-
-      try {
-        registerFont(FONT_PATH, { family: "NotoSansJP" })
-        console.log("[OG] Font registered:", FONT_PATH)
-      } catch (e) {
-        console.error("[OG] Font register failed:", e)
-      }
-
-      console.log("[OG] allFiles length:", ctx.allFiles.length)
-
-      let count = 0
+      registerFont(FONT_PATH, { family: "NotoSansJP" })
 
       for (const file of ctx.allFiles) {
-        if (typeof file === "string") {
-          console.log("[OG] skip string file:", file)
-          continue
-        }
-
-        if (!file.slug) {
-          console.log("[OG] skip: no slug", file.filePath)
-          continue
-        }
+        if (typeof file === "string") continue
+        if (!file.slug) continue
 
         const title =
           file.frontmatter?.title ??
-          file.slug.replace(/-/g, " ")
+          file.slug.split("/").at(-1)!.replace(/-/g, " ")
 
-        console.log(`[OG] Generating: slug=${file.slug}, title=${title}`)
+        const outPath = path.join(outRoot, `${file.slug}.png`)
+
+        // ★ 階層ディレクトリを必ず作る
+        await fs.mkdir(path.dirname(outPath), { recursive: true })
 
         const canvas = createCanvas(1200, 630)
         const c = canvas.getContext("2d")
@@ -58,16 +40,10 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
         drawMultilineText(c, title, 100, 200, 1000, 80)
 
         const buffer = canvas.toBuffer("image/png")
-        const outPath = path.join(outDir, `${file.slug}.png`)
-
         await fs.writeFile(outPath, buffer)
 
         console.log(`[OG] Generated: ${outPath}`)
-        count++
       }
-
-      console.log(`[OG] Done. Generated ${count} images.`)
-      console.log("[OG] ===== emitter end =====")
 
       return []
     },

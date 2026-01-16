@@ -4,15 +4,44 @@ export const CustomOgMetaJA: QuartzTransformerPlugin = () => {
   return {
     name: "CustomOgMetaJA",
 
-    async transform(_ctx, files) {
-      for (const file of files) {
-        if (!file.slug) continue
+    htmlPlugins() {
+      return [
+        {
+          name: "custom-og-meta-ja",
+          transform: (tree, file) => {
+            if (!file.slug) return
 
-        file.frontmatter = file.frontmatter ?? {}
-        file.frontmatter.ogImage = `/og/${file.slug}.png`
-      }
+            const ogPath = `/og/${file.slug}.png`
 
-      return files
+            const head = tree.children.find(
+              (n) => n.type === "element" && n.tagName === "head"
+            )
+
+            if (!head) return
+
+            head.children.push(
+              {
+                type: "element",
+                tagName: "meta",
+                properties: {
+                  property: "og:image",
+                  content: ogPath,
+                },
+                children: [],
+              },
+              {
+                type: "element",
+                tagName: "meta",
+                properties: {
+                  name: "twitter:card",
+                  content: "summary_large_image",
+                },
+                children: [],
+              }
+            )
+          },
+        },
+      ]
     },
   }
 }
