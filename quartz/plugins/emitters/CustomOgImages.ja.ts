@@ -11,27 +11,20 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
     name: "CustomOgImagesJA",
 
     async emit(ctx) {
-      console.log("[OG] ===== emitter start =====")
-
       const outDir = path.join(ctx.argv.output, "og")
       await fs.mkdir(outDir, { recursive: true })
-      console.log("[OG] outDir:", outDir)
 
       registerFont(FONT_PATH, { family: "NotoSansJP" })
-      console.log("[OG] Font registered:", FONT_PATH)
 
       let count = 0
 
       for (const file of ctx.allFiles) {
         if (!isFullPage(file)) continue
-
-        const slug = file.slug
-        if (!slug) continue
+        if (!file.slug) continue
 
         const title =
           file.frontmatter?.title ??
-          file.data?.title ??
-          slug.replace(/-/g, " ")
+          file.slug.replace(/-/g, " ")
 
         const canvas = createCanvas(1200, 630)
         const c = canvas.getContext("2d")
@@ -46,7 +39,7 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
         drawMultilineText(c, title, 100, 200, 1000, 80)
 
         const buffer = canvas.toBuffer("image/png")
-        const outPath = path.join(outDir, `${slug}.png`)
+        const outPath = path.join(outDir, `${file.slug}.png`)
         await fs.writeFile(outPath, buffer)
 
         console.log(`[OG] Generated: ${outPath}`)
@@ -54,9 +47,29 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
       }
 
       console.log(`[OG] Done. Generated ${count} images.`)
-      console.log("[OG] ===== emitter end =====")
 
       return []
     },
   }
+}
+
+function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
+  const chars = text.split("")
+  let line = ""
+  let yy = y
+
+  for (const ch of chars) {
+    const testLine = line + ch
+    const w = ctx.measureText(testLine).width
+
+    if (w > maxWidth) {
+      ctx.fillText(line, x, yy)
+      line = ch
+      yy += lineHeight
+    } else {
+      line = testLine
+    }
+  }
+
+  if (line) ctx.fillText(line, x, yy)
 }
