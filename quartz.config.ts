@@ -77,7 +77,7 @@ const config: QuartzConfig = {
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
       // Comment out CustomOgImages to speed up build time
-      CustomOgImagesJA(),
+      Plugin.CustomOgImagesJA(),
     ],
     
     filters: [Plugin.RemoveDrafts()],
