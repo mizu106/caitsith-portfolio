@@ -17,11 +17,14 @@ export const CustomOgImagesJA: QuartzTransformerPlugin = () => {
       registerFont(FONT_PATH, { family: "NotoSansJP" })
 
       for (const file of files) {
+        console.log("[OG] Processing:", file.slug)
         if (!file.slug) continue
 
         const title =
           file.frontmatter?.title ??
           file.slug.replace(/-/g, " ")
+          const outPath = path.join(outDir, `${safeSlug}.png`)
+
 
         const canvas = createCanvas(1200, 630)
         const c = canvas.getContext("2d")
@@ -44,6 +47,9 @@ export const CustomOgImagesJA: QuartzTransformerPlugin = () => {
 
         // デバッグログ（Actionsに出る）
         console.log(`[OG] Generated: ${outPath}`)
+        console.log("[OG] Plugin started")
+        console.log("[OG] Output dir:", outDir)
+        console.log("[OG] Files:", files.length)
 
         // frontmatter 注入
         file.frontmatter = file.frontmatter ?? {}
