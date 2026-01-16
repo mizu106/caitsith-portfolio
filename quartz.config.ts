@@ -1,6 +1,6 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
-import { CustomOgImagesJA } from "./quartz/plugins/transformers/CustomOgImages.ja"
+import { CustomOgImagesJA } from "./quartz/plugins/CustomOgImages.ja"
 
 
 /**
