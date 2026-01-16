@@ -2,9 +2,6 @@ import { StaticResources } from "../util/resources"
 import { FilePath, FullSlug } from "../util/path"
 import { BuildCtx } from "../util/ctx"
 
-export { CustomOgMetaJA } from "./transformers/CustomOgMeta.ja"
-export { CustomOgImagesJA } from "./emitters/CustomOgImages.ja"
-
 export function getStaticResourcesFromPlugins(ctx: BuildCtx) {
   const staticResources: StaticResources = {
     css: [],
