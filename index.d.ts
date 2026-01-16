@@ -1,15 +1,56 @@
-declare module "*.scss" {
-  const content: string
-  export = content
+import { StaticResources } from "../util/resources"
+import { FilePath, FullSlug } from "../util/path"
+import { BuildCtx } from "../util/ctx"
+
+export function getStaticResourcesFromPlugins(ctx: BuildCtx) {
+  const staticResources: StaticResources = {
+    css: [],
+    js: [],
+    additionalHead: [],
+  }
+
+  for (const transformer of [...ctx.cfg.plugins.transformers, ...ctx.cfg.plugins.emitters]) {
+    const res = transformer.externalResources ? transformer.externalResources(ctx) : {}
+    if (res?.js) {
+      staticResources.js.push(...res.js)
+    }
+    if (res?.css) {
+      staticResources.css.push(...res.css)
+    }
+    if (res?.additionalHead) {
+      staticResources.additionalHead.push(...res.additionalHead)
+    }
+  }
+
+  // if serving locally, listen for rebuilds and reload the page
+  if (ctx.argv.serve) {
+    const wsUrl = ctx.argv.remoteDevHost
+      ? `wss://${ctx.argv.remoteDevHost}:${ctx.argv.wsPort}`
+      : `ws://localhost:${ctx.argv.wsPort}`
+
+    staticResources.js.push({
+      loadTime: "afterDOMReady",
+      contentType: "inline",
+      script: `
+        const socket = new WebSocket('${wsUrl}')
+        // reload(true) ensures resources like images and scripts are fetched again in firefox
+        socket.addEventListener('message', () => document.location.reload(true))
+      `,
+    })
+  }
+
+  return staticResources
 }
 
-// dom custom event
-interface CustomEventMap {
-  prenav: CustomEvent<{}>
-  nav: CustomEvent<{ url: FullSlug }>
-  themechange: CustomEvent<{ theme: "light" | "dark" }>
-  readermodechange: CustomEvent<{ mode: "on" | "off" }>
-}
+export * from "./transformers"
+export * from "./filters"
+export * from "./emitters"
 
-type ContentIndex = Record<FullSlug, ContentDetails>
-declare const fetchData: Promise<ContentIndex>
+declare module "vfile" {
+  // inserted in processors.ts
+  interface DataMap {
+    slug: FullSlug
+    filePath: FilePath
+    relativePath: FilePath
+  }
+}

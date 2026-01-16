@@ -76,8 +76,6 @@ const config: QuartzConfig = {
       Plugin.CrawlLinks(),
       Plugin.Description(),
       Plugin.Latex({ renderEngine: "katex" }),
-      // Comment out CustomOgImages to speed up build time
-      CustomOgMetaJA(),
     ],
     
     filters: [Plugin.RemoveDrafts()],
@@ -96,7 +94,8 @@ const config: QuartzConfig = {
       Plugin.Static(),
       // Plugin.Favicon(),    // 有効化するとDeployでTimeoutする為コメントアウト
       Plugin.NotFoundPage(),
-      CustomOgImagesJA(),
+      // Comment out CustomOgImages to speed up build time
+      Plugin.CustomOgImages(),
     ],
   },
   markdown: {             // Obsidianスタイルのリンクを有効化
