@@ -2,6 +2,7 @@ import fs from "fs/promises"
 import path from "path"
 import { createCanvas, registerFont } from "canvas"
 import type { QuartzEmitterPlugin } from "../types"
+import { isFullPage } from "../../util/vfile"
 
 const FONT_PATH = "assets/fonts/NotoSansJP-Regular.ttf"
 
@@ -10,22 +11,27 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
     name: "CustomOgImagesJA",
 
     async emit(ctx) {
-      const outRoot = path.join(ctx.argv.output, "og")
+      console.log("[OG] ===== emitter start =====")
+
+      const outDir = path.join(ctx.argv.output, "og")
+      await fs.mkdir(outDir, { recursive: true })
+      console.log("[OG] outDir:", outDir)
 
       registerFont(FONT_PATH, { family: "NotoSansJP" })
+      console.log("[OG] Font registered:", FONT_PATH)
+
+      let count = 0
 
       for (const file of ctx.allFiles) {
-        if (typeof file === "string") continue
-        if (!file.slug) continue
+        if (!isFullPage(file)) continue
+
+        const slug = file.slug
+        if (!slug) continue
 
         const title =
           file.frontmatter?.title ??
-          file.slug.split("/").at(-1)!.replace(/-/g, " ")
-
-        const outPath = path.join(outRoot, `${file.slug}.png`)
-
-        // ★ 階層ディレクトリを必ず作る
-        await fs.mkdir(path.dirname(outPath), { recursive: true })
+          file.data?.title ??
+          slug.replace(/-/g, " ")
 
         const canvas = createCanvas(1200, 630)
         const c = canvas.getContext("2d")
@@ -40,33 +46,17 @@ export const CustomOgImagesJA: QuartzEmitterPlugin = () => {
         drawMultilineText(c, title, 100, 200, 1000, 80)
 
         const buffer = canvas.toBuffer("image/png")
+        const outPath = path.join(outDir, `${slug}.png`)
         await fs.writeFile(outPath, buffer)
 
         console.log(`[OG] Generated: ${outPath}`)
+        count++
       }
+
+      console.log(`[OG] Done. Generated ${count} images.`)
+      console.log("[OG] ===== emitter end =====")
 
       return []
     },
   }
-}
-
-function drawMultilineText(ctx, text, x, y, maxWidth, lineHeight) {
-  const chars = text.split("")
-  let line = ""
-  let yy = y
-
-  for (const ch of chars) {
-    const testLine = line + ch
-    const w = ctx.measureText(testLine).width
-
-    if (w > maxWidth) {
-      ctx.fillText(line, x, yy)
-      line = ch
-      yy += lineHeight
-    } else {
-      line = testLine
-    }
-  }
-
-  if (line) ctx.fillText(line, x, yy)
 }
