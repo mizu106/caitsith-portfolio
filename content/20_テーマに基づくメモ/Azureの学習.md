@@ -7,7 +7,7 @@ tags:
 
 ### [[20_テーマに基づくメモ/AzureVM解体新書]]
 
-### [[20_テーマに基づくメモ/AzureFirewall]]
+### [[20_テーマに基づくメモ/Azure/AzureFirewall]]
 
 ### [[01_書きかけ/AzureVMwareSolution]]
 
