@@ -62,7 +62,7 @@ AFWは、AVNのリソースを保護するためのクラウドベースのネ�
 ### AzureFirewall用のSubnet
 - AzureFirewallを配置する為のSubnetが必要になります。
 - このSubnetを利用してハブ・アンド・スポークを構成することがよくあります。
-  [[20_テーマに基づくメモ/ゼロトラストセキュリティ]]
+  [[01_書きかけ/ゼロトラストセキュリティ]]
 - 参考URL ハブ・アンド・スポークについて
   [Azure Firewall を使用してマルチハブ およびスポーク トポロジをルーティングする | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/firewall/firewall-multi-hub-spoke)
 
