@@ -3,6 +3,11 @@ tags:
   - DB/SQLServer
 ---
 
+# 概要
+SQL Serverは手軽でMicrosoft環境ではよく導入されているので、気になったことを調べてメモしています。
+現在はExpressエディションについてのみです。
+
+# 本文
 ## 目次
 ```table-of-contents
 title: 
@@ -17,7 +22,7 @@ debugInConsole: false # Print debug info in Obsidian console
 ```
 
 ## SQL Serverのエディション
-「SQL Serverライト」は通常、**SQL Server Express Edition**（エクスプレスエディション）を指します。これは、有償の**Standard Edition**（標準版）などと比較して、==**無償である代わりに機能や性能に制限がある**点==が主な違いです。
+「SQL Serverライト」は通常、**SQL Server Express Edition**（エクスプレスエディション）を指します。これは、有償の**Standard Edition**（標準版）などと比較して、**無償である代わりに機能や性能に制限がある**点が主な違いです。
 
 ### 主な違い
 

@@ -3,6 +3,10 @@ tags:
   - Web技術/MQ
 ---
 
+# 概要
+仕事で関わったTP1-MQについて、調べた内容をメモしています。
+中身は公式サイトからの抜粋です。
+
 # Cosminexusとは
 
 [目次 : TP1/Message Queue 使用の手引](https://itpfdoc.hitachi.co.jp/manuals/3000/30003d9040/MQUG0001.HTM)

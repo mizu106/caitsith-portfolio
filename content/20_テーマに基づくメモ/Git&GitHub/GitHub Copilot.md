@@ -4,17 +4,17 @@ tags:
   - AI/開発ツール
 ---
 
-# GithubCopilot
-```table-of-contents
-```
+# 概要
+Github copilotを使ってみようと思い、調べたことをメモしました。
+まだまだ書き足りないと感じています。
 
+# 本文
 ## GithubCopilotの導入
 1. Github上で使用する（上の方にあるCopilotアイコンでエディタ起動）
 2. VSCodeから使用する（拡張機能をインストールする）
 
 ## VSCodeのGithubCopilot拡張
 VSCodeに拡張機能を入れて使っています。
-
 - GitHub Copilot Chat
 - GitHub Codespaces
 - GitHub Repositories
@@ -22,7 +22,6 @@ VSCodeに拡張機能を入れて使っています。
 - GitHub Copilot for Azure
 
 ## VSCodeで使用する
-
 ### モード
 VSCodeでGithubCopilotを使用する場合、２つのモードが存在する。
 - Chatモード
@@ -42,7 +41,7 @@ VSCodeでGithubCopilotを使用する場合、２つのモードが存在する�
 | 次の単語を受け入れる        | Ctrl + ⇢     |
 | 複数の提案を含む、新しいタグを開く | Ctrl + Enter |
 
-### 無料で学ぶ
+# 参考資料
 ### 【書籍】[はじめに｜サクッと始めるAIネイティブ開発【GitHub Copilot / ChatGPT】](https://zenn.dev/umi_mori/books/ai-native-programming/viewer/intro)
 実際の使い方やテクニックを記載した書籍「サクッと始めるAIネイティブ開発」がZennで全て公開されている。
 これを読んで一通り実行したら、VSCodeでGithubCopilotを利用する方法については充分な知識が得られる。

@@ -3,6 +3,10 @@ tags:
   - Azure/KQL
 ---
 
+# 概要
+Azureで状態を調査しようとすると必ず登場するのが診断設定とKQLだったので、理解した事をメモとして残しました。
+
+# 本文
 ### AzureMonitorリファレンス
 
 - [Azure Monitor のドキュメント - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/)

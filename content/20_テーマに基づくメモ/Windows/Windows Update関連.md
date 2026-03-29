@@ -2,6 +2,10 @@
 tags:
   - OS/Windows
 ---
+
+# 概要
+以前、仕事でWindowsUpdateについて調べたので、その時に使用したサイトなどをメモしました。
+
 # Windows Update関連
 
 ## キャッシュの破損で発生するエラーについて

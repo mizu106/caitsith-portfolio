@@ -4,6 +4,10 @@ tags:
   - Firewall
 ---
 
+# 概要
+AzureFirewall導入案件に参画した際に、AFWで実現できる機能を調査したのでメモを残しました。
+
+# 本文
 ※この記事は正確性よりもインフラエンジニアが直感的に理解しやすい構成を意識して書いています。明らかに誤っている点があればご指摘下さい。
 
 ## AzureFirewall
@@ -20,7 +24,6 @@ AFWは、AVNのリソースを保護するためのクラウドベースのネ�
 - IDPS（FW通過パケットのみ）
 
 それぞれの機能の詳細は価格設定によって別れています。
-
 ### Basic　￥59.64/h
 - 参考URL 
   [Azure portal を使用して Azure Firewall の基本とポリシーをデプロイして構成する | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/firewall/deploy-firewall-basic-portal-policy)
@@ -103,7 +106,7 @@ AzureFirewallは
 - 参考URL  TLSインスペクションについて
   [TLS インスペクション | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/firewall/premium-features#tls-inspection)
 
-## 細かい話
+# 細かい話
 ここでは、綺麗に分類できなかったテーマを扱います。
 
 ### [[20_テーマに基づくメモ/Azure/AzureFirewall]]のポリシー処理順序

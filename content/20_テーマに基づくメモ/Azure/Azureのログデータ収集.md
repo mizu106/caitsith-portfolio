@@ -3,6 +3,11 @@ tags:
   - Azure/Monitor
 ---
 
+# 概要
+OS上のログを収集する為のルール「Data Collection Rule」について調べたので、メモを残しました。
+また理解が不十分です、これからも追記修正していく予定です。
+
+# 本文
 ### DCRを使ったログの収集
 
 - [【Azure】Log Analyticsを理解する（初級） - APC 技術ブログ](https://techblog.ap-com.co.jp/entry/2025/02/28/103702)

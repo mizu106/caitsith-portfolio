@@ -6,6 +6,10 @@ tags:
   - Python
 ---
 
+# 概要
+新しいPCの購入を考えているので、使用しているPCのGPU性能（特にAI）を測ってみました。
+その結果を記録しています。
+
 # 自宅PCのGPUを使ってみる
 サプーさんの動画を使って、自宅PCのGPUを動作させてみる。
 - [NVIDIAのGPUをAIで使ってみよう！〜 ローカルPCでAIを動かす〜 WSLを使ったバージョン](https://www.youtube.com/watch?v=K_lgT7Bba8k)
@@ -32,22 +36,22 @@ nvidia-smi
 - [WSL2が原因でCドライブの容量が不足したときの対処法（2025年8月版） #WSL2 - Qiita](https://qiita.com/stqq/items/2262e2adb9c8d82739d0)
 
 1. WSLをシャットダウン
-      ``` shell
+``` shell
       wsl --shutdown
-   ```
+```
 2. VHDの圧縮
    Optimize-VHDコマンドが使えたので、それを使用。
-      ``` shell
+``` shell
     Optimize-VHD -Path "C:\Users\<ユーザー名>\AppData\Local\Packages\<PackageFamilyName>\LocalState\ext4.vhdx" -Mode Full
-   ```
-3. VHDを扱うツールをダウンロード
+```
+2. VHDを扱うツールをダウンロード
    [LxRunOffline](https://github.com/DDoSolitary/LxRunOffline/releases)
-4. ディストリビューションを移動
+3. ディストリビューションを移動
    *Dドライブに移動する例*
-   ```shell
-   .\LxRunOffline.exe move -n Ubuntu -d D:\WSL\Ubuntu
+```shell
+.\LxRunOffline.exe move -n Ubuntu -d D:\WSL\Ubuntu
 .\LxRunOffline.exe move -n docker-desktop -d D:\WSL\docker-desktop
-   ```
+```
 
 何故か*移動先にファイルがあるというエラーが発生して失敗した*ので、手でファイルを移動して、wslコマンドでディストリビューションを削除、再登録した。
 
@@ -120,7 +124,7 @@ wsl --terminate Ubuntu
 ##### WSL全体をシャットダウン：  
 ```powershell
     wsl --shutdown
-        ```
+```
 
 ## CUDA Toolkit、cuDNN、Pytorhcのインストール
 ここはバージョンの縛りがあるので、まとめて考えたほうが良い。

@@ -4,7 +4,10 @@ tags:
   - Programming
   - AI/生成AI
 ---
+# 概要
+趣味で読んだ書籍のメモを記録しました。
 
+# 本文
 ## 書籍情報
 著：立山 秀利（Hidetoshi Tateyama）
 編：日経ソフトウェア

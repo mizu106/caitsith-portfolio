@@ -2,6 +2,8 @@
 tags:
   - 仕事/MicrosoftSecurity
 ---
+# 概要
+仕事でE5 Securityに関わったので、AIに概要を整理させたときのメモです。
 
 # Microsoft 365 E5 Security アドオン - エンジニア向け技術解説
 
@@ -515,4 +517,3 @@ Endpointログ: イベントビューア > Microsoft > Windows > SENSE
 ---
 
 **更新日**: 2024年11月  
-**対象バージョン**: Microsoft 365 E5 Security（2024年後期版）
