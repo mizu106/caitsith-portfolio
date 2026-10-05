@@ -1,6 +1,8 @@
 ---
+draft: true
 tags:
-  - AI/生成AI
+  - AI
+  - 生成AI
 ---
 
 # 概要

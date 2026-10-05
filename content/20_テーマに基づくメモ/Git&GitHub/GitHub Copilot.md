@@ -1,7 +1,8 @@
 ---
+draft: true
 tags:
   - AI
-  - AI/開発ツール
+  - "#GithubCopilot"
 ---
 
 # 概要

@@ -1,8 +1,9 @@
 ---
+draft: true
 tags:
-  - Book/ディープラーニング
   - Programming
-  - AI/生成AI
+  - AI
+  - 生成AI
 ---
 # 概要
 趣味で読んだ書籍のメモを記録しました。

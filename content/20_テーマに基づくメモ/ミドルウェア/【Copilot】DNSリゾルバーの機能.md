@@ -1,6 +1,7 @@
 ---
+draft: true
 tags:
-  - Network/DNS
+  - DNS
 ---
 
 # 概要

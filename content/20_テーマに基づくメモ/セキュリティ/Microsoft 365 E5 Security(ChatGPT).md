@@ -1,4 +1,5 @@
 ---
+draft: true
 tags:
   - 仕事/MicrosoftSecurity
 ---

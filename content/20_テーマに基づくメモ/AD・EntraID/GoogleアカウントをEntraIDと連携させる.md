@@ -1,4 +1,5 @@
 ---
+draft: true
 tags:
   - EntraID
   - 認証

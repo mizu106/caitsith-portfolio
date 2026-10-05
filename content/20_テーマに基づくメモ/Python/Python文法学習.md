@@ -1,4 +1,5 @@
 ---
+draft: true
 tags:
   - Python/文法
 ---

@@ -1,6 +1,8 @@
 ---
+draft: true
 tags:
-  - Azure/KQL
+  - Azure
+  - KQL
 ---
 
 # 概要

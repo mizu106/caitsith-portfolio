@@ -1,4 +1,5 @@
 ---
+draft: true
 tags:
   - ノート術
   - zettelkasten

@@ -1,6 +1,7 @@
 ---
+draft: true
 tags:
-  - Azure/Monitor
+  - AzureMonitor
 ---
 
 # 概要

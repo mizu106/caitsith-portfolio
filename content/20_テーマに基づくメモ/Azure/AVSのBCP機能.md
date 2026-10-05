@@ -1,26 +1,29 @@
 ---
+draft: true
 tags:
-  - Azure/AVS
+  - Azure
+  - "#AVS"
 ---
 
 # 概要
-「AVSでBCPする時に、ASR使えるのかな？」という疑問を起点に調べてみました。
+「AVSでBCPを考える時に、ASR使えるのかな？」という疑問を起点に調べてみました。
 なぜその疑問が発生したのか…
 - ASRはディスクのレプリケーションという認識なので、VMwareのホストマシンを取り込んだAVSではどのレベルでレプリケーションするのか疑問に感じたこと
-- WMwareはBCPの機能でも有名なのにその機能は活かさないのか？（AVSの存在意義に反する感じがしました）
+- WMwareはBCPに使える機能でも有名なのに、その機能は活かさないのか？
 
-結果、AVSではWMwareの**vSphere High Availability**を使用するため、BCP先のリージョンにもAVSを構築しておく必要がある…（ASRと比較してお金がかかる）事が分かりました。
+結果、AVSではWMwareの**vSphere High Availability**を使用するため、レプリケーション先のリージョンにもAVSを構築しておく必要がある…（ASRと比較してお金がかかる）事が分かりました。
 
 最近、AVS＋ASR型のBCPを採用している案件を見かけるので、AVS導入企業でも**vSphere High Availability**は避けているのかもしれません…
 
+###### BCPとは：（Business Continuity Plan：事業継続計画）自然災害、感染症の流行、サイバー攻撃などの緊急事態において、企業が損害を最小限に抑えつつ、重要業務を継続・早期復旧させるための計画。
+
 # 本文
 ### AVSのBCP機能
-**Azure VMware Solution（AVS）のBCP機能には、ストレッチクラスター、バックアップ、フェールオーバー設計などが含まれ、事業継続と災害復旧（BCDR）を支援します。**
+**Azure VMware Solution（AVS）のDR機能には、ストレッチクラスター、バックアップ、フェールオーバー設計などが含まれ、事業継続と災害復旧（BCDR）を支援します。**
 
 以下に、AVSで利用可能なBCP（Business Continuity Planning）機能を体系的にまとめます：
 
 ---
-
 ### 🧩 主なBCP機能と設計要素
 
 #### 1. **vSphere High Availability（HA）**

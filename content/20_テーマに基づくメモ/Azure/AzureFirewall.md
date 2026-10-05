@@ -1,4 +1,5 @@
 ---
+draft: true
 tags:
   - Azure
   - Firewall
@@ -109,7 +110,7 @@ AzureFirewallは
 # 細かい話
 ここでは、綺麗に分類できなかったテーマを扱います。
 
-### [[20_テーマに基づくメモ/Azure/AzureFirewall]]のポリシー処理順序
+### AzureFirewallのポリシー処理順序
 1. 脅威インテリジェンスのフィルターは最優先されます。
 2. Rule Collection Group は優先度順に処理されます。
 3. Rule Collection は優先度順に処理されます。
