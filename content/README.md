@@ -1,3 +1,10 @@
+---
+publish: true
+title: README
+created: 2026-10-05T12:24:40.715Z
+modified: 2026-10-13T13:34:24.455Z
+---
+
 # caitsith Portfolio
 
 このリポジトリは、学習ログをそのままポートフォリオとして公開するためのものです。
@@ -14,7 +21,7 @@
 
 ## 運用フロー
 
-1. Obsidianで 「10_日付順メモ」 に学習メモを書く
+1. Obsidianで 「10\_日付順メモ」 に学習メモを書く
 2. GitHubにpush
 3. GitHub Pagesで自動公開
 

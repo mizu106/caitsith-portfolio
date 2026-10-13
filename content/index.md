@@ -1,11 +1,14 @@
 ---
-title: "caitsith's Learning Log"
+publish: true
+title: caitsith's Learning Log
+created: 2026-10-05T11:52:15.235Z
+modified: 2026-10-13T13:34:09.335Z
 ---
 
 # caitsith's Learning Log
 
 どこにでもいるITインフラのエンジニアです。主にオンプレのサーバー周りを経験してきました。（Windows、Linux）
-Azure設計・AI × Python を中心に、日々の学習と思考を記録しています。  
+Azure設計・AI × Python を中心に、日々の学習と思考を記録しています。\
 このサイトは「成果物」ではなく、「思考の過程」を公開するためのもので、Obsidianで書いたものをQuartzを使ってHTML化しています。
 
 ---
@@ -36,4 +39,4 @@ Azure設計・AI × Python を中心に、日々の学習と思考を記録し�
 
 ## 最近のログ
 
-10_日付順メモ フォルダをご覧ください。
+10\_日付順メモ フォルダをご覧ください。

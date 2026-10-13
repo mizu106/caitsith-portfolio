@@ -1,10 +1,13 @@
 ---
-title: "About"
+publish: true
+title: About
+created: 2026-10-05T11:52:15.231Z
+modified: 2026-10-13T13:33:57.413Z
 ---
 
 # About caitsith
 
-普段は個人で Azure 設計や AI × Python の実験をしています。  
+普段は個人で Azure 設計や AI × Python の実験をしています。\
 このページは、もくもく会・自習会などでの最低限の自己紹介用です。
 
 ---
