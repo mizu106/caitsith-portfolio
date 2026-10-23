@@ -2,7 +2,7 @@
 publish: true
 title: README
 created: 2026-10-05T12:24:40.715Z
-modified: 2026-10-23T12:36:27.523Z
+modified: 2026-10-23T12:37:26.109Z
 ---
 
 # Quartz更新履歴
@@ -94,7 +94,7 @@ Quartz Syncerを使用して、`content/`配下の記事を追加・更新・削
 4. アップロード対象の記事を選択（チェックボックスON）する。
 5. Publish to Remoteボタンをクリックする。
 
-以上を行うとGitHub Actionでビルドされて、ビルドが完了するとQuartzサイトに表示されます。
+以上を行うとGitHub Actionでビルドされて、ビルドが完了するとQuartzサイトに表示される。
 
 ---
 
