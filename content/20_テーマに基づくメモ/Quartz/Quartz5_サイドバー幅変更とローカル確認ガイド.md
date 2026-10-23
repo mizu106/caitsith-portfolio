@@ -2,7 +2,7 @@
 publish: true
 title: Quartz5 サイドバー幅変更とローカル確認ガイド
 created: 2026-10-23
-modified: 2026-10-23T12:56:12.279Z
+modified: 2026-10-23T16:36:33.330Z
 tags:
   - Quartz
   - GitHub
@@ -14,44 +14,43 @@ tags:
 
 Explorerの日本語ファイル名を読みやすくしつつ、本文幅を確保するための運用手順です。
 
-| 対象 | 内容 |
-|---|---|
-| プロジェクト | `OneDrive\ドキュメント\Git\caitsith-portfolio` |
-| 主な修正ファイル | `quartz/styles/variables.scss` |
-| 現在の設計 | 左サイドバー 420px / 中央 auto / 右サイドバー 320px |
-| 確認方法 | `npx quartz build --serve` → `http://localhost:8080` |
+| 対象        | 内容                                                                    |
+| --------- | --------------------------------------------------------------------- |
+| プロジェクト    | `\Git\caitsith-portfolio`                                             |
+| 主な修正ファイル  | `quartz/styles/variables.scss`                                        |
+| 変更前の設計    | 左サイドバー 320px / 中央 auto / 右サイドバー 320px                                 |
+| 変更後の設計    | 左サイドバー 420px / 中央 auto / 右サイドバー 320px                                 |
+| 変更結果の確認方法 | ビルド　`npx quartz build --serve` <br>　→ ブラウザー表示　`http://localhost:8080` |
 
-## 結論
+## 変更ポイント
 
-Explorerの幅は`div.explorer.nav-files-container`自体ではなく、Quartz全体のGrid列幅で決まります。
+Explorerの幅は、`\Git\caitsith-portfolio\quartz\styles\variables.scss`内の、`$sidePanelWidth`で左右のペインの幅を決めているため、ここを2つの変数に分けて左側だけ幅を広げます。
 
-左右共通の幅を使うと右側まで広がって本文が狭くなるため、左右を別変数として管理します。
+## この修正を行う場面
 
-## この文書を使う場面
-
-- 長い日本語ファイル名の折り返しが再び気になったとき
+- 長い日本語ファイル名の折り返しが気になったとき
 - 右側のGraph ViewやTable of Contentsとのバランスを調整したいとき
-- Quartz更新後にレイアウトが崩れていないか再確認するとき
 
 ---
 
-## 1. 今回行った修正
+## 1. 実施した修正内容
 
-修正前は`$sidePanelWidth`が左右両方に適用されていました。420pxへ広げるとExplorerは読みやすくなりましたが、右側も420pxになり、中央本文が必要以上に狭くなりました。そこで左右を独立させています。
+修正前は`$sidePanelWidth`が左右両方に適用されていました。420pxへ広げると左側のメニューは読みやすくなりましたが、右側も420pxになり、中央本文が必要以上に狭くなりました。
+そこで、`$desktopGrid`の`templateColumns: "#{$leftSidePanelWidth} auto #{$rightSidePanelWidth}"`のところの変数を２つに分けてることで、左右の幅を独立させています。
 
-| 領域 | 設定値 | 目的 |
-|---|---:|---|
-| 左 | 420px | Explorerの日本語ファイル名の折り返しを減らす |
-| 中央 | auto | 残り幅を本文へ割り当てる |
-| 右 | 320px | Graph Viewと目次を維持しつつ本文幅を戻す |
+| 領域  | 変数名                  |   設定値 | 目的                         |
+| --- | -------------------- | ----: | -------------------------- |
+| 左   | $leftSidePanelWidth  | 420px | Explorerの日本語ファイル名の折り返しを減らす |
+| 中央  | 自動設定                 |  auto | 残り幅を本文へ割り当てる               |
+| 右   | $rightSidePanelWidth | 320px | Graph Viewと目次を維持しつつ本文幅を戻す  |
 
 ### 修正対象
 
 ```text
-OneDrive\ドキュメント\Git\caitsith-portfolio\quartz\styles\variables.scss
+\Git\caitsith-portfolio\quartz\styles\variables.scss
 ```
 
-### 基本形
+### 幅の設定箇所（pixel単位）
 
 ```scss
 $leftSidePanelWidth: 420px;
@@ -61,11 +60,13 @@ $rightSidePanelWidth: 320px;
 ### Grid定義での使用
 
 ```scss
+// タブレットの幅設定
 $tabletGrid: (
   templateColumns: "#{$leftSidePanelWidth} auto",
   // その他の既存設定は維持
 );
 
+// ブラウザーの幅設定
 $desktopGrid: (
   templateColumns: "#{$leftSidePanelWidth} auto #{$rightSidePanelWidth}",
   // その他の既存設定は維持
