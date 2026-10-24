@@ -2,18 +2,16 @@
 publish: true
 title: caitsith's Learning Log
 created: 2026-10-05T11:52:15.235Z
-modified: 2026-10-24T13:19:23.899Z
+modified: 2026-10-24T13:22:19.921Z
 ---
 
 # caitsith's Learning Log
 
-![[Files/Designer (6).png]]
 Obsidianに記録した技術学習、調査、制作、思考の過程を、
 Quartzを使って公開している個人サイトです。
+![[Files/Designer (6).png]]
 
 ## このサイトの見方
-
-![[Files/Designer (5).png]]
 
 ### 左サイドバー：記事を探す
 
@@ -30,6 +28,7 @@ Explorerには、公開されているフォルダと記事が表示されます
 
 現在開いている記事の見出しが表示されます。
 見出しを選ぶと、その位置へ移動できます。
+![[Files/Designer (5).png]]
 
 ## このサイトで読めること
 
