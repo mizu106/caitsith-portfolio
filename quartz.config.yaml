@@ -209,10 +209,19 @@ plugins:
       priority: 5
       condition: not-index
   - source: "@quartz-community/comments"
-    enabled: false
+    enabled: true
     options:
       provider: giscus
-      options: {}
+      options: 
+        repo: mizu106/caitsith-portfolio
+        repoId: "R_kgDOQ4bW3Q"
+        category: Announcements
+        categoryId: "DIC_kwDOQ4bW3c4DJlcM"
+        mapping: pathname
+        strict: true
+        reactionsEnabled: true
+        inputPosition: bottom
+        lang: ja
     layout:
       position: afterBody
       priority: 10
