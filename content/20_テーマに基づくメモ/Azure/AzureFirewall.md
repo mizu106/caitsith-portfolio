@@ -3,9 +3,12 @@ publish: true
 title: Azure Firewallの機能と設計要素
 created: 2026-10-05T11:52:21.518Z
 modified: 2026-10-25T15:10:14.426Z
+published: 2026-10-25T15:10:14.426Z
 tags:
   - Azure
   - Firewall
+draft: false
+comments: false
 ---
 
 # 概要

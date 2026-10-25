@@ -4,6 +4,8 @@ title: About
 comments: true
 created: 2026-10-05T11:52:15.231Z
 modified: 2026-10-25T16:48:08.769Z
+published: 2026-10-25T16:48:08.769Z
+draft: false
 ---
 
 # About caitsith
