@@ -3,7 +3,7 @@ publish: true
 title: About
 comments: true
 created: 2026-10-05T11:52:15.231Z
-modified: 2026-10-25T15:08:53.013Z
+modified: 2026-10-25T16:48:08.769Z
 ---
 
 # About caitsith
