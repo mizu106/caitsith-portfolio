@@ -1,8 +1,9 @@
 ---
 publish: true
 title: About
+comments: true
 created: 2026-10-05T11:52:15.231Z
-modified: 2026-10-24T13:48:25.030Z
+modified: 2026-10-25T15:08:53.013Z
 ---
 
 # About caitsith

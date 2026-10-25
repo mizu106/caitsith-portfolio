@@ -2,7 +2,7 @@
 publish: true
 title: README
 created: 2026-10-05T12:24:40.715Z
-modified: 2026-10-23T12:37:26.109Z
+modified: 2026-10-25T15:09:09.537Z
 ---
 
 # Quartz更新履歴
@@ -118,6 +118,5 @@ Quartz is a set of tools that helps you publish your [digital garden](https://jz
 <p align="center">
   <a href="https://github.com/sponsors/jackyzha0">
     <img src="https://cdn.jsdelivr.net/gh/jackyzha0/jackyzha0/sponsorkit/sponsors.svg" />
-    
   </a>
 </p>
